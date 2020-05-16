@@ -1,19 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 // Angular Forms Modules
-import {  ReactiveFormsModule ,FormsModule} from '@angular/forms'
-import { NavbarModule} from 'angular-bootstrap-md';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './Components/header/header.component';
-import { SignInComponent } from './Components/sign-in/sign-in.component';
-import { FooterComponent } from './Components/footer/footer.component';
-import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
-import { SignUpComponent } from './Components/sign-up/sign-up.component';
-import { ListCoursComponent } from './Components/list-cours/list-cours.component';
-import { DisponibiliteComponent } from './Components/disponibilite/disponibilite.component';
-import {TableModule} from "primeng";
+import {ReactiveFormsModule, FormsModule} from '@angular/forms'
+import {NavbarModule} from 'angular-bootstrap-md';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './Components/header/header.component';
+import {SignInComponent} from './Components/sign-in/sign-in.component';
+import {FooterComponent} from './Components/footer/footer.component';
+import {ForgotPasswordComponent} from './Components/forgot-password/forgot-password.component';
+import {SignUpComponent} from './Components/sign-up/sign-up.component';
+import {ListCoursComponent} from './Components/list-cours/list-cours.component';
+import {DisponibiliteComponent} from './Components/disponibilite/disponibilite.component';
+import {ButtonModule, TableModule} from "primeng";
 
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
@@ -39,28 +39,31 @@ import {HttpClientModule} from "@angular/common/http";
     ListCoursComponent,
     DisponibiliteComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MDBBootstrapModule.forRoot(),
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MDBBootstrapModule.forRoot(),
 
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        AngularFireStorageModule,
-        AngularFireMessagingModule,
-        AngularFireAuthModule,
-        AngularFireDatabaseModule,
-        AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireMessagingModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
 
 
-        ReactiveFormsModule,
-        FormsModule,
-        HttpClientModule,
-        NavbarModule,
-        TableModule,
-    ],
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    NavbarModule,
+    TableModule,
+    ButtonModule,
+
+  ],
   providers: [MessageService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
