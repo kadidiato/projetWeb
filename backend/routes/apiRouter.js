@@ -6,6 +6,7 @@ const eleveRouter = require('./eleves/elevesRouter');
 const reservationCoursRouter = require('./reservationsCours/reservationCoursRouter');
 const profsRouter = require('./profs/profsRouter');
 const disponibilitesRouter = require('./disponibilite/disponibilitesRouter');
+//const utilisateurRouter = require('./utilisateur/utilisateurRouter');
 const utilisateurRouter = require('./utilisateur/utilisateurRouter');
 
 exports.router = (function () {

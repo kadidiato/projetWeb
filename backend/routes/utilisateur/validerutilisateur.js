@@ -44,6 +44,7 @@ const getById = () => {
  */
 const validate = (req, res, next) => {
     const errors = validationResult(req);
+    console.log('in validate')
     if (errors.isEmpty()) {
         return next()
     }
@@ -62,15 +63,13 @@ const validate = (req, res, next) => {
 function save() {
     return [
         body('nom', 'Nom saisi est invalide')
-            .exists().withMessage('parametre Nom introuvable').toString(),
-
+            .exists().withMessage('parametre Nom introuvable').trim().escape(),
         body('prenom', 'prenom saisi est invalide')
-            .exists().withMessage('parametre prenom introuvable').toString(),
+            .exists().withMessage('parametre prenom introuvable').trim().escape(),
         body('type', 'Type saisi est invalide')
-            .exists().withMessage('parametre type introuvable').toString(),
-        body('email', 'email saisi est invalide')
-            .exists().withMessage('parametre email introuvable').toString(),
-
+            .exists().withMessage('parametre type introuvable').trim().escape(),
+        body('email', 'Email saisi est invalide')
+            .exists().withMessage('parametre type introuvable').trim().escape(),
     ]
 }
 
