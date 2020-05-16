@@ -1,0 +1,12 @@
+{
+  "/back": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "pathRewrite": {
+      "^/back": ""
+    },
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
+

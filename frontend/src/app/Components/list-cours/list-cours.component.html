@@ -1,0 +1,15 @@
+<p-table [value]="cours">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>date</th>
+      <th>heure</th>
+    </tr>
+  </ng-template>
+  <ng-template let-cour pTemplate="body">
+    <tr>
+      <td>{{cour.dateCour | date}}</td>
+      <td>{{cour.heureCour | date}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
