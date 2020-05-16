@@ -28,15 +28,15 @@
                   <th>Action</th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-c>
+              <ng-template pTemplate="body" let-c >
                 <tr>
                   <td>{{c.id}}</td>
                   <td>{{c.dateCour | date: 'dd/MM/yyyy'}}</td>
                   <td>{{c.heureCour | date: 'dd/MM/yyyy'}}</td>
                   <td>{{c.createdAt | date: 'dd/MM/yyyy'}}</td>
                   <td>{{c.updatedAt | date: 'dd/MM/yyyy'}}</td>
-                  <td  class="text-center ">
-                    <div class="btn-group">
+                  <td  >
+                    <div class="btn-group" class="text-center ">
                       <button  [routerLink]="['/listCours/details', c.id]"
                         class="btn btn-info"><i class="far fa-eye"></i>
                       </button>
