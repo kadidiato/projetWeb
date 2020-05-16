@@ -11,7 +11,7 @@ function getAll(req, res, next) {
         //si je trouve pas de cours je retourne un status 404 avec un petit message
         if (!eleve)
             return res.status(404).json({
-                message: 'aucun cours trouvé'
+                message: 'aucun eleve  trouvé'
             });
         //si tout s'est bien passé je retourne le status 200 et le cours trouvé
         return res.status(200).json(eleve);
@@ -58,7 +58,7 @@ function save(req, res, next) {
     };
 
     //insertion dans la base de données
-    models.eleve.create(eleve).then((newEleve) => {
+    models.Eleve.create(eleve).then((newEleve) => {
         if (!newEleve) {
             return res.status(500).json({
                 message: 'Une erreur est survenue lors de la création du cours'
@@ -80,7 +80,7 @@ function save(req, res, next) {
 function destroy(req, res, next) {
     let eleve_id = req.params.id;
 
-    models.eleve.destroy({
+    models.Eleve.destroy({
         where: {id: eleve_id}
     }).then((destroyedEleve) => {
         return res.status(200).json(destroyedEleve);
@@ -111,7 +111,7 @@ function update(req, res, next) {
         
     };
 
-    models.eleve.update(eleve, {
+    models.Eleve.update(eleve, {
         where: {id: id}
     }).then((updatedEleve) => {
         return res.status(200).json(updatedEleve);

@@ -13,7 +13,7 @@ router.get('/:id', validerEleves.getById(), validerEleves.validate, eleveCtrl.ge
 
 //route pour créer un cours
 //url: POST /api/eleves
-router.post('/', validerEleves.save, validerEleves.validate, eleveCtrl.save)
+router.post('/', validerEleves.save(), validerEleves.validate, eleveCtrl.save)
 
 //route pour supprimer un cours
 //url: DELETE /api/eleves/:id
