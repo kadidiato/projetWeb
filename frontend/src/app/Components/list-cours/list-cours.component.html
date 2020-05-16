@@ -35,9 +35,9 @@
                   <td>{{c.heureCour | date: 'dd/MM/yyyy'}}</td>
                   <td>{{c.createdAt | date: 'dd/MM/yyyy'}}</td>
                   <td>{{c.updatedAt | date: 'dd/MM/yyyy'}}</td>
-                  <td>
-                    <div class="btn-group" class="text-center ">
-                      <button
+                  <td  class="text-center ">
+                    <div class="btn-group">
+                      <button  [routerLink]="['/listCours/details', c.id]"
                         class="btn btn-info"><i class="far fa-eye"></i>
                       </button>
                       <button

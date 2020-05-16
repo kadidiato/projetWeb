@@ -26,6 +26,7 @@ import {AngularFireMessagingModule} from '@angular/fire/messaging';
 
 import {MessageService} from 'primeng/api';
 import {HttpClientModule} from "@angular/common/http";
+import { DetailCourComponent } from './Components/list-cours/detail-cour/detail-cour.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {HttpClientModule} from "@angular/common/http";
     ForgotPasswordComponent,
     SignUpComponent,
     ListCoursComponent,
-    DisponibiliteComponent
+    DisponibiliteComponent,
+    DetailCourComponent
   ],
   imports: [
     BrowserModule,
