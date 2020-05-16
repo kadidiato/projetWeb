@@ -17,4 +17,7 @@ router.get('/:id', validerutilisateur.getById(), validerutilisateur.validate, ut
 //router.post('/', validerutilisateur.save(), validerutilisateur.validate, utilisateurCtrl.save)
 router.post('/', validerutilisateur.save(), validerutilisateur.validate, utilisateurCtrl.save);
 
+
+router.put('/',validerutilisateur.save(), validerutilisateur.getById(),validerutilisateur.validate, utilisateurCtrl.update);
+
 module.exports = router;
