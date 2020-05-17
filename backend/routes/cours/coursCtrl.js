@@ -49,7 +49,9 @@ function save(req, res, next) {
         dateCour: req.body.dateCour,
         heureCour: req.body.heureCour,
        // EleveId: req.body.eleveId,
-        ProfId: req.body.profId
+        ProfId: req.body.profId,
+        matiere: req.body.matiere,
+        description: req.body.description,
     };
 
     //insertion dans la base de données
@@ -96,7 +98,9 @@ function update(req, res, next) {
         dateCour: req.body.dateCour,
         heureCour: req.body.heureCour,
        // EleveId: req.body.eleveId,
-        ProfId: req.body.profId
+        ProfId: req.body.profId,
+        matiere: req.body.matiere,
+        description: req.body.description,
     };
 
     models.Cours.update(cours, {

@@ -1,7 +1,7 @@
 /**
  * https://express-validator.github.io/docs
  */
-const {body, check, validationResult} = require('express-validator');
+const { body, check, validationResult } = require('express-validator');
 
 /**
  * Utile quand on veut filter les entrées trouvées ou faire de la
@@ -48,7 +48,7 @@ const validate = (req, res, next) => {
         return next()
     }
     const extractedErrors = [];
-    errors.array().map(err => extractedErrors.push({[err.param]: err.msg}))
+    errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
 
     return res.status(422).json({
         errors: extractedErrors,
@@ -61,12 +61,21 @@ const validate = (req, res, next) => {
  */
 function save() {
     return [
-       
+
         body('profId', 'invalid parameter id')
             .exists().withMessage('parametre eleveId introuvable')
             .isNumeric().withMessage('parametre eleveId doit être numérique')
             .trim().escape(),
-       
+        body('dateDispo', 'date de disponibilite invalide')
+            .exists().withMessage('parametre heureCour introuvable').toDate(),
+        body('heureDispoDebu', 'heure de debut dispo invalide')
+            .exists().withMessage('parametre heureCour introuvable').toDate(),
+        body('heureDispoFin', 'heure de fin  dispo invalide')
+            .exists().withMessage('parametre heureCour introuvable').toDate(),
+
+        body('description', 'description saisi est invalide')
+            .exists().withMessage('parametre description introuvable').trim().escape(),
+
     ]
 }
 
