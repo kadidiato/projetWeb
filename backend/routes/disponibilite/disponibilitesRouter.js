@@ -3,27 +3,27 @@ var router = express.Router();
 var disponibilitesCtrl = require('./disponibilitesCtrl');
 var validerDisponibilites = require('./validerDisponibilites');
 
-//recuperer toutes les cours reserves
-//url: GET /api/eleves
+//recuperer toutes les disponibilite
+//url: GET /api/disponibilites
 router.get('/', validerDisponibilites.getAll(), validerDisponibilites.validate, disponibilitesCtrl.getAll);
 
-//route qui gère la recuperation d'un cours
-//url: GET /api/eleves/:id
+//route qui gère la recuperation d'une disponibilites
+//url: GET /api/disponibilites/:id
 router.get('/:id', validerDisponibilites.getById(), validerDisponibilites.validate, disponibilitesCtrl.getById);
 
-//route pour créer un cours
-//url: POST /api/eleves
-router.post('/', validerDisponibilites.save, validerDisponibilites.validate, disponibilitesCtrl.save)
+//route pour créer une disponibilite
+//url: POST /api/disponibilites
+router.post('/', validerDisponibilites.save(), validerDisponibilites.validate, disponibilitesCtrl.save)
 
-//route pour supprimer un cours
-//url: DELETE /api/eleves/:id
+//route pour supprimer une disponibilite
+//url: DELETE /api/disponibilites/:id
 router.delete('/:id', validerDisponibilites.getById(),
     validerDisponibilites.validate,
     disponibilitesCtrl.destroy);
 
 
-//route pour mettre à jour un cours
-//url: PUT /api/reservationsCours
-router.put('/', validerDisponibilites.save, validerDisponibilites.validate, disponibilitesCtrl.update)
+//route pour mettre à jour une disponibilite
+//url: PUT /api/disponibilites
+router.put('/', validerDisponibilites.save(), validerDisponibilites.validate, disponibilitesCtrl.update)
 
 module.exports = router;
