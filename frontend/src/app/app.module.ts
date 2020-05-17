@@ -13,7 +13,7 @@ import {ForgotPasswordComponent} from './Components/forgot-password/forgot-passw
 import {SignUpComponent} from './Components/sign-up/sign-up.component';
 import {ListCoursComponent} from './Components/list-cours/list-cours.component';
 import {DisponibiliteComponent} from './Components/disponibilite/disponibilite.component';
-import {ButtonModule, TableModule} from "primeng";
+import {ButtonModule, DialogModule, TableModule} from "primeng";
 
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
@@ -26,7 +26,9 @@ import {AngularFireMessagingModule} from '@angular/fire/messaging';
 
 import {MessageService} from 'primeng/api';
 import {HttpClientModule} from "@angular/common/http";
-import { DetailCourComponent } from './Components/list-cours/detail-cour/detail-cour.component';
+import {DetailCourComponent} from './Components/list-cours/detail-cour/detail-cour.component';
+import {DialogCourComponent} from './Components/list-cours/dialog-cour/dialog-cour.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -39,12 +41,14 @@ import { DetailCourComponent } from './Components/list-cours/detail-cour/detail-
     SignUpComponent,
     ListCoursComponent,
     DisponibiliteComponent,
-    DetailCourComponent
+    DetailCourComponent,
+    DialogCourComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -61,6 +65,7 @@ import { DetailCourComponent } from './Components/list-cours/detail-cour/detail-
     HttpClientModule,
     NavbarModule,
     TableModule,
+    DialogModule,
     ButtonModule,
 
   ],
