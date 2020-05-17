@@ -6,7 +6,7 @@ const eleveRouter = require('./eleves/elevesRouter');
 const reservationCoursRouter = require('./reservationsCours/reservationCoursRouter');
 const profsRouter = require('./profs/profsRouter');
 const disponibilitesRouter = require('./disponibilite/disponibilitesRouter');
-const utilisateurRouter = require('./utilisateur/utilisateurRouter');
+//const utilisateurRouter = require('./utilisateur/utilisateurRouter');
 
 exports.router = (function () {
     var apiRouter = express.Router();
@@ -16,7 +16,7 @@ exports.router = (function () {
     apiRouter.use('/reservationsCours', reservationCoursRouter);
     apiRouter.use('/profs', profsRouter);
     apiRouter.use('/disponibilites', disponibilitesRouter);
-    apiRouter.use('/utilisateur', utilisateurRouter);
+    //apiRouter.use('/utilisateur', utilisateurRouter);
 
     return apiRouter;
 })();

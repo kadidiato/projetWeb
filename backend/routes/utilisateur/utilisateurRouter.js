@@ -13,7 +13,7 @@ router.get('/:id', validerutilisateur.getById(), validerutilisateur.validate, ut
 
 //route pour créer un utilisateur
 //url: POST /api/utilisateur
-router.post('/', validerutilisateur.save(), validerutilisateur.validate, utilisateurCtrl.save);
+//router.post('/', validerutilisateur.save(), validerutilisateur.validate, utilisateurCtrl.save);
 
 //route pour supprimer un utilisateur
 //url: DELETE /api/utilisateur/:id

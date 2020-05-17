@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Cours} from "../../../Interface/cours";
+import {CoursService} from "../../../Service/cours.service";
 
 @Component({
   selector: 'app-dialog-cour',
@@ -24,7 +25,7 @@ export class DialogCourComponent implements OnInit {
   @Output() onDialogHide = new EventEmitter(true);
   typesProf: [1, 2];
 
-  constructor() {
+  constructor(private coursService: CoursService) {
   }
 
   ngOnInit(): void {
@@ -34,7 +35,12 @@ export class DialogCourComponent implements OnInit {
     this.onDialogHide.emit();
   }
 
-  ajouterCour(cour: Cours) {
+  ajouterCour() {
+    this.coursService.addCours(this.cour).subscribe((response) => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
 
   }
 }

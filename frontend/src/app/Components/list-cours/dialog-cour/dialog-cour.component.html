@@ -1,8 +1,8 @@
 <p-dialog header="Profile" [(visible)]="afficherDialog" [modal]="true" [responsive]="true"
           [style]="{width: '400px', minWidth: '250px'}" [minY]="90"
           [maximizable]="true" [baseZIndex]="10000" (onHide)="onHide()">
-  <form>
-    <div class="form-group">
+  <form #form="ngForm">
+    <div class="form-group" *ngIf="cour">
       <label for="ProfId">Profil du professeur</label>
       <select [(ngModel)]="cour.profId" id="ProfId" name="ProfId">
         <option value="1">1</option>
@@ -10,22 +10,22 @@
         <!--        <option *ngFor="let type of typesProf" [value]="type">{{typesProf}}</option>-->
       </select>
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="cour">
       <label for="dateCour">Date de cour</label>
       <input [(ngModel)]="cour.dateCours" class="form-control" id="dateCour" name="dateCour"
              placeholder="Entrez la date du cour" required type="date">
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="cour">
       <label for="heureCour">Date de début du cour</label>
-      <input [(ngModel)]="cour.dateCours" class="form-control" id="heureCour" name="heureCour"
+      <input [(ngModel)]="cour.heureCours" class="form-control" id="heureCour" name="heureCour"
              placeholder="Entrez la date du cour" required type="datetime-local">
     </div>
     <br>
     <p-footer>
-      <button type="button" pButton (click)="ajouterCour(cour)" label="Ajouter"
+      <button type="button" pButton (click)="ajouterCour()" label="Ajouter"
               class="ui-button-rounded" style="margin-right: 10px"></button>
       <button type="button" pButton icon="fa fa-close" (click)="afficherDialog=false" label="Annuler"
-              class="ui-button-secondary ui-button-rounded"></button>
+              class="ui-button-secondary ui-button-rounded" [disabled]="form.invalid"></button>
     </p-footer>
   </form>
 </p-dialog>
