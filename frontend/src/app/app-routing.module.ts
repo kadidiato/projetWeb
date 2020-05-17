@@ -12,12 +12,12 @@ const routes: Routes = [
   {path: '', redirectTo: 'listCours', pathMatch: 'full'},
   {path: 'sign-in', component: SignInComponent},
   {path: 'register-user', component: SignUpComponent},
-  //{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  // { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   {path: 'forgot-password', component: ForgotPasswordComponent},
   // { path: 'verify-email-address', component: VerifyEmailComponent },
   {path: 'listCours', component: ListCoursComponent},
   {path: 'listCours/details/:id', component: DetailCourComponent},
-  //{path: 'ajoutcours', component: AjoutCoursComponent },
+  // {path: 'ajoutcours', component: AjoutCoursComponent },
   {path: 'disponibilite', component: DisponibiliteComponent},
 ];
 
