@@ -1,4 +1,5 @@
 var models = require('../../models');
+const {validationResult} = require('express-validator');
 
 /**
  * Controller pour recuperer tous les cours
@@ -54,28 +55,54 @@ function getByProfId(req, res, next){
  * @param next
  */
 function save(req, res, next) {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        res.status(422).json({errors: errors.array()});
+        return;
+    }
     //recuperation des infos du cours à creer
     let cours = {
-        dateCour: req.body.dateCour,
-        heureCour: req.body.heureCour,
-       // EleveId: req.body.eleveId,
         ProfId: req.body.profId,
+        dateCour: req.body.dateCour,
+        heureCour: req.body.heureCour || null,
         matiere: req.body.matiere,
         description: req.body.description,
     };
 
-    //insertion dans la base de données
-    models.Cours.create(cours).then((newCours) => {
-        if (!newCours) {
-            return res.status(500).json({
-                message: 'Une erreur est survenue lors de la création du cours'
+    models.Prof.findOne({
+        where: {id: cours.ProfId}
+    }).then((profFound) => {
+        if (profFound) {
+            models.Cours.create(cours).then((newCours) => {
+                if (newCours) {
+                    return res.status(201).json(newCours);
+                } else {
+                    return res.status(500).json({
+                        message: 'Une erreur est survenue lors de la création du cours'
+                    });
+                }
+            }).catch((err) => {
+                console.error(err);
+                return res.status(500).json({
+                    status: 'error',
+                    message: err.errors
+                });
             });
+        } else {
+            return res.status(404).json({
+                status: 'error',
+                message: `Aucun prof trouvé avec l'identifiant ` + cours.ProfId
+            })
         }
-
-        return res.status(201).json(newCours);
     }).catch((err) => {
-        return res.status(500).json(err);
-    })
+        console.error(err);
+        return res.status(500).json({
+            status: 'error',
+            message: err.errors
+        });
+    });
+
 }
 
 /**
@@ -107,7 +134,7 @@ function update(req, res, next) {
     let cours = {
         dateCour: req.body.dateCour,
         heureCour: req.body.heureCour,
-       // EleveId: req.body.eleveId,
+        // EleveId: req.body.eleveId,
         ProfId: req.body.profId,
         matiere: req.body.matiere,
         description: req.body.description,

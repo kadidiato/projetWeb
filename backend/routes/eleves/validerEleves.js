@@ -1,7 +1,7 @@
 /**
  * https://express-validator.github.io/docs
  */
-const { body, check, validationResult } = require('express-validator');
+const {body, check, validationResult} = require('express-validator');
 
 /**
  * Utile quand on veut filter les entrées trouvées ou faire de la
@@ -48,7 +48,7 @@ const validate = (req, res, next) => {
         return next()
     }
     const extractedErrors = [];
-    errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
+    errors.array().map(err => extractedErrors.push({[err.param]: err.msg}))
 
     return res.status(422).json({
         errors: extractedErrors,
@@ -61,25 +61,16 @@ const validate = (req, res, next) => {
  */
 function save() {
     return [
-        body('nomEleve', 'Nom saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
-        body('prenomEleve', 'prenom saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
+        body('nomEleve', 'Nom saisi est invalide').optional().trim().escape(),
+        body('prenomEleve', 'prenom saisi est invalide').optional().trim().escape(),
         body('mailEleve', 'mail saisi est invalide')
             .exists().withMessage('parametre mail introuvable').trim().escape(),
-        body('niveauEleve', 'Niveau saisi est invalide')
-            .exists().withMessage('parametre niveau introuvable').trim().escape(),
-        body('rueEleve', 'Rue saisi est invalide')
-            .exists().withMessage('parametre rue introuvable').trim().escape(),
-        body('villeEleve', 'Ville saisi est invalide')
-            .exists().withMessage('parametre ville introuvable').trim().escape(),
+        body('niveauEleve', 'Niveau saisi est invalide').optional().trim().escape(),
+        body('rueEleve', 'Rue saisi est invalide').optional().trim().escape(),
+        body('villeEleve', 'Ville saisi est invalide').optional().trim().escape(),
 
-        body('zipEleve', 'code postale saisi est invalide')
-            .exists().withMessage('parametre code postale introuvable')
-            .isNumeric().withMessage('parametre postale doit être numérique')
-            .trim().escape(),
-        body('paysEleve', 'Pays saisi est invalide')
-            .exists().withMessage('parametre pays introuvable').trim().escape(),
+        body('zipEleve', 'code postale saisi est invalide').optional().trim().escape(),
+        body('paysEleve', 'Pays saisi est invalide').optional().trim().escape(),
 
     ]
 }

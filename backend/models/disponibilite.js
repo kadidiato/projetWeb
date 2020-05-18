@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
         dateDispo: DataTypes.DATE,
         heureDispoDebu: DataTypes.DATE,
         heureDispoFin: DataTypes.DATE,
-        description:DataTypes.STRING,
-        profId:DataTypes.INTEGER
+        description: DataTypes.STRING,
+        profId: DataTypes.INTEGER
     }, {});
     Disponibilite.associate = function (models) {
         // associations can be defined here

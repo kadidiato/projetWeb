@@ -51,7 +51,7 @@ function save(req, res, next) {
         email: req.body.email,
         type: req.body.type
     };
-    
+
     //insertion dans la base de données
     models.utilisateur.create(utilisateur_).then((newUtilisateur) => {
         if (!newUtilisateur) {
@@ -76,7 +76,7 @@ function destroy(req, res, next) {
     let utilisateur_id = req.params.id;
 
     models.utilisateur.destroy({
-        where: { id: cours_id }
+        where: {id: cours_id}
     }).then((destroyedutilisateur) => {
         return res.status(200).json(destroyedutilisateur);
     }).catch((err) => {

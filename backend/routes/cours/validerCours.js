@@ -1,7 +1,7 @@
 /**
  * https://express-validator.github.io/docs
  */
-const { body, check, validationResult } = require('express-validator');
+const {body, check, validationResult} = require('express-validator');
 
 /**
  * Utile quand on veut filter les entrées trouvées ou faire de la
@@ -48,7 +48,7 @@ const validate = (req, res, next) => {
         return next()
     }
     const extractedErrors = [];
-    errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
+    errors.array().map(err => extractedErrors.push({[err.param]: err.msg}))
 
     return res.status(422).json({
         errors: extractedErrors,
@@ -61,16 +61,16 @@ const validate = (req, res, next) => {
  */
 function save() {
     return [
-        
         body('profId', 'invalid parameter id')
-            .exists().withMessage('parametre profId introuvable')
-            .isNumeric().withMessage('parametre profId doit être numérique')
+            .not().isEmpty().withMessage('parametre profId ne doit pas etre vide')
+            .isNumeric().withMessage(`Le Paramètre profId doit être numérique`)
             .trim().escape(),
-            
+
         body('dateCour', 'date de cours invalide')
-            .exists().withMessage('parametre heureCour introuvable').toDate(),
-        body('heureCour', 'date de cours invalide')
-            .exists().withMessage('parametre heureCour introuvable').toDate(),
+            .exists().withMessage('parametre date cour introuvable')
+            .toDate(),
+        body('heureCour', 'date de cours invalide').optional()
+            .toDate(),
 
         body('matiere', 'Matiere saisi est invalide')
             .exists().withMessage('parametre matiere introuvable').trim().escape(),

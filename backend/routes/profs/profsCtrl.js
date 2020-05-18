@@ -53,13 +53,13 @@ function save(req, res, next) {
         // a enlever cette parti pour faire la table nottation
         nbAvisPos: req.body.nbAvisPos,
         nbAvisNeg: req.body.nbAvisNeg,
-      //
+        //
         niveauEProf: req.body.niveauEProf,
         rueProf: req.body.rueProf,
         villeProf: req.body.villeProf,
         zipProf: req.body.zipProf,
         paysProf: req.body.paysProf,
-        
+
     };
 
     //insertion dans la base de données
@@ -110,13 +110,13 @@ function update(req, res, next) {
         // a enlever cette parti pour faire la table nottation
         nbAvisPos: req.body.nbAvisPos,
         nbAvisNeg: req.body.nbAvisNeg,
-      //
+        //
         niveauEProf: req.body.niveauEProf,
         rueProf: req.body.rueProf,
         villeProf: req.body.villeProf,
         zipProf: req.body.zipProf,
         paysProf: req.body.paysProf,
-        
+
     };
 
     models.Prof.update(prof, {
