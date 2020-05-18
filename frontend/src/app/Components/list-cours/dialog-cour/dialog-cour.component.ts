@@ -34,6 +34,14 @@ export class DialogCourComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cour = {
+      dateCour: "",
+      description: "",
+      heureCour: "",
+      id: "",
+      matiere: "",
+      profId: "",
+    };
     this.getAllProfs();
   }
 
@@ -41,8 +49,10 @@ export class DialogCourComponent implements OnInit {
     this.onDialogHide.emit();
   }
 
-  ajouterCour(cour: Cours) {
-    this.coursService.addCours(cour).subscribe((response) => {
+  ajouterCour() {
+    console.log("-------");
+    console.log(this.cour);
+    this.coursService.addCours(this.cour).subscribe((response) => {
       console.log(response);
       console.log("ok");
     }, error => {

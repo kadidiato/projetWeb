@@ -18,7 +18,7 @@ export class ElevesService {
   }
 
   getEleveByid(id: number) {
-    return this.http.get<Eleves>(`${this.url}/${id}`);
+    return this.http.get<Eleves>(`${this.url}/eleves/${id}`);
   }
 
   /*  addEleve(eleve: Eleves): Observable<Eleves> {

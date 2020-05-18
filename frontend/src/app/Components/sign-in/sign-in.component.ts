@@ -101,7 +101,7 @@ export class SignInComponent implements OnInit {
   sendToServeur() {
     this.afAuth.user.subscribe(eleve => {
       const i = eleve.displayName.indexOf(' '); // couper en 2 displayname pour avoir le prenom et le nom
-      if (eleve.uid) {
+      if (eleve.uid !== undefined) {
         this.elevesService.addEleve({
           // variable que le serveur s'attend a recevoir
           nomEleve: eleve.displayName.substr(0, i),

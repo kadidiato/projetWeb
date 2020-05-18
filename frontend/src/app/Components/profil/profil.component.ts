@@ -10,6 +10,8 @@ import {ElevesService} from "../../Service/eleves.service";
   styleUrls: ['./profil.component.scss']
 })
 export class ProfilComponent implements OnInit {
+  eleves: Eleves[]; // l'utilisateur courant
+  eleveId: number;
   eleve: Eleves; // l'utilisateur courant
   prof: Prof; // l'utilisateur courant
   userPhoto: Eleves = { // je stock la photo de profil recuperer dans firebase
@@ -20,14 +22,14 @@ export class ProfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.init();
+    this.getAllEleves();
   }
 
-  async init() {
+  async init(id: number) {
     await this.afAuth.user.subscribe(u => {
       if (u) {
         console.log(u.uid);
-        this.elevesService.getEleveByid(this.eleve.id).subscribe(res => {
+        this.elevesService.getEleveByid(id).subscribe(res => {
           this.eleve = res;
           this.userPhoto.photo = u.photoURL;
         }, r => {
@@ -37,8 +39,33 @@ export class ProfilComponent implements OnInit {
     });
   }
 
+  getAllEleves() {
+    this.elevesService.getAllEleve().subscribe(res => {
+      this.eleves = res;
+      console.log('AllEleve');
+      console.log(res);
+      console.log(this.eleveId);
+
+      let el = this.getEleveById(1, this.eleves);
+
+      this.eleveId = el.id;
+      console.log(this.eleveId);
+
+      console.log('getEleveById');
+      console.log(this.getEleveById(1, this.eleves));
+      this.init(this.eleveId);
+    }, error => {
+      console.log(error);
+    });
+  }
 
   afficherDialogProfil() {
 
+  }
+
+  getEleveById(id, tableeau) {
+    return tableeau.filter((elt) => {
+      return elt.id === id;
+    });
   }
 }
