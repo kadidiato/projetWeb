@@ -37,6 +37,16 @@ function getById(req, res, next) {
     });
 }
 
+function getByProfId(req, res, next){
+    let profId=req.params.id;
+    models.Cours.findAll({
+        where: {
+          profId: profId,
+        }
+      });
+
+}
+
 /**
  * Controller pour sauvegarder un cours
  * @param req

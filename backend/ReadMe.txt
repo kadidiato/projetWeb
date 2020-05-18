@@ -29,4 +29,12 @@ Creer la base de donnees du nom "database_api" puis configure le fichier fichier
     "operatorsAliases": false
   }
 }
+Executer cette commande pour inporter la base de donnee
 
+npx sequelize-cli db:migrate
+
+Executer cette commande pour  importer des donnees
+
+npx sequelize-cli db:seed:all
+Pour lancer serveur executer la commande
+npm start
