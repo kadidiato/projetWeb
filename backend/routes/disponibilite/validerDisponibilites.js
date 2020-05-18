@@ -61,12 +61,21 @@ const validate = (req, res, next) => {
  */
 function save() {
     return [
-       
+
         body('profId', 'invalid parameter id')
             .exists().withMessage('parametre eleveId introuvable')
             .isNumeric().withMessage('parametre eleveId doit être numérique')
             .trim().escape(),
-       
+        body('dateDispo', 'date de disponibilite invalide')
+            .exists().withMessage('parametre heureCour introuvable').toDate(),
+        body('heureDispoDebu', 'heure de debut dispo invalide')
+            .exists().withMessage('parametre heureCour introuvable').toDate(),
+        body('heureDispoFin', 'heure de fin  dispo invalide')
+            .exists().withMessage('parametre heureCour introuvable').toDate(),
+
+        body('description', 'description saisi est invalide')
+            .exists().withMessage('parametre description introuvable').trim().escape(),
+
     ]
 }
 

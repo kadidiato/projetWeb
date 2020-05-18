@@ -14,22 +14,6 @@ export class CoursService {
   constructor(private http: HttpClient) {
   }
 
-  /**
-   * recuperation tous les  cours
-   *
-   */
-  async getAllCours(): Promise<any[]> {
-    return new Promise<any>(((resolve, reject) => {
-      this.http.get(`${this.api_redirect}/cours`, {responseType: 'text'}).toPromise().then(
-        res => {
-          console.log('Tous les cours de base de donnees');
-          resolve(res);
-        }, rej => {
-          reject(rej);
-        }
-      );
-    }));
-  }
 
   getCoursBe(): Observable<any> {
     return this.http.get(`${this.api_redirect}/cours`);

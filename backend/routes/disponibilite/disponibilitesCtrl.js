@@ -50,6 +50,7 @@ function save(req, res, next) {
         dateDispo: req.body.dateDispo,
         heureDispoDebu: req.body.heureDispoDebu,
         heureDispoFin: req.body.heureDispoFin,
+        description: req.body.description,
 
     };
 

@@ -62,16 +62,25 @@ const validate = (req, res, next) => {
 function save() {
     return [
         body('nomEleve', 'Nom saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').toString(),
-        
-        body('eleveId', 'invalid parameter id')
-            .exists().withMessage('parametre eleveId introuvable')
-            .isNumeric().withMessage('parametre eleveId doit être numérique')
+            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
+        body('prenomEleve', 'prenom saisi est invalide')
+            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
+        body('mailEleve', 'mail saisi est invalide')
+            .exists().withMessage('parametre mail introuvable').trim().escape(),
+        body('niveauEleve', 'Niveau saisi est invalide')
+            .exists().withMessage('parametre niveau introuvable').trim().escape(),
+        body('rueEleve', 'Rue saisi est invalide')
+            .exists().withMessage('parametre rue introuvable').trim().escape(),
+        body('villeEleve', 'Ville saisi est invalide')
+            .exists().withMessage('parametre ville introuvable').trim().escape(),
+
+        body('zipEleve', 'code postale saisi est invalide')
+            .exists().withMessage('parametre code postale introuvable')
+            .isNumeric().withMessage('parametre postale doit être numérique')
             .trim().escape(),
-        body('coursId', 'invalid parameter id')
-            .exists().withMessage('parametre coursId introuvable')
-            .isNumeric().withMessage('parametre coursId doit être numérique')
-            .trim().escape(),
+        body('paysEleve', 'Pays saisi est invalide')
+            .exists().withMessage('parametre pays introuvable').trim().escape(),
+
     ]
 }
 

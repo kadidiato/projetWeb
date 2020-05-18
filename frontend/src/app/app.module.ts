@@ -29,6 +29,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {DetailCourComponent} from './Components/list-cours/detail-cour/detail-cour.component';
 import {DialogCourComponent} from './Components/list-cours/dialog-cour/dialog-cour.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgxSelectModule} from "ngx-select-ex";
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     TableModule,
     DialogModule,
     ButtonModule,
+    NgxSelectModule,
 
   ],
   providers: [MessageService],

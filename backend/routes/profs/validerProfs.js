@@ -62,16 +62,14 @@ const validate = (req, res, next) => {
 function save() {
     return [
         body('nomProf', 'Nom saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').toString(),
+            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
         body('prenomProf', 'Prenom saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').toString(),
-        body('matiereProf', 'matiereProf saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').toString(),
-        body('niveauProf', 'niveauProf saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').toString(),
-        body('rueProf', 'rueProf saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').toString(), 
+            .exists().withMessage('parametre mail introuvable').trim().escape(),
+        body('mailProf', 'matiereProf saisi est invalide')
+            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
 
+        body('matiereProf', 'matiereProf saisi est invalide')
+            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
 
         body('nbAvisPos', 'invalid parameter id')
             .exists().withMessage('parametre eleveId introuvable')
@@ -81,6 +79,21 @@ function save() {
             .exists().withMessage('parametre coursId introuvable')
             .isNumeric().withMessage('parametre coursId doit être numérique')
             .trim().escape(),
+
+        body('niveauProf', 'niveauProf saisi est invalide')
+            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
+
+        body('rueProf', 'rueProf saisi est invalide')
+            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
+
+        body('villeProf', 'ville saisi est invalide')
+            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
+
+        body('zipProf', 'invalid parameter id').trim().escape(),
+
+
+        body('paysProf', 'Pays saisi est invalide')
+            .exists().withMessage('parametre Pays introuvable').trim().escape(),
     ]
 }
 

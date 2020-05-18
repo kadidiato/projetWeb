@@ -24,6 +24,8 @@
           <ng-template pTemplate="header">
             <tr class="text-center ">
               <th>Cours #</th>
+              <th>Matiere</th>
+              <th>Description</th>
               <th>Date cour</th>
               <th>Heure cour</th>
               <th>Créer le</th>
@@ -34,12 +36,14 @@
           <ng-template pTemplate="body" let-c>
             <tr class="text-center ">
               <td>{{c.id}}</td>
+              <td>{{c.matiere}}</td>
+              <td>{{c.description}}</td>
               <td>{{c.dateCour | date: 'dd/MM/yyyy'}}</td>
               <td>{{c.heureCour | date: 'dd/MM/yyyy'}}</td>
               <td>{{c.createdAt | date: 'dd/MM/yyyy'}}</td>
               <td>{{c.updatedAt | date: 'dd/MM/yyyy'}}</td>
               <td>
-                <div class="btn-group">
+                <div class="btn-group" class="text-center ">
                   <button [routerLink]="['/listCours/details', c.id]"
                           class="btn btn-info"><i class="far fa-eye"></i>
                   </button>

@@ -61,18 +61,21 @@ const validate = (req, res, next) => {
  */
 function save() {
     return [
-        body('dateCour', 'date de cours invalide')
-            .exists().withMessage('parametre heureCour introuvable').toDate(),
-        body('heureCour', 'date de cours invalide')
-            .exists().withMessage('parametre heureCour introuvable').toDate(),
-       // body('eleveId', 'invalid parameter id')
-           // .exists().withMessage('parametre eleveId introuvable')
-           // .isNumeric().withMessage('parametre eleveId doit être numérique')
-            //.trim().escape(),
         body('profId', 'invalid parameter id')
-            .exists().withMessage('parametre profId introuvable')
-            .isNumeric().withMessage('parametre profId doit être numérique')
+            .not().isEmpty().withMessage('parametre profId ne doit pas etre vide')
+            .isNumeric().withMessage(`Le Paramètre profId doit être numérique`)
             .trim().escape(),
+
+        body('dateCour', 'date de cours invalide')
+            .exists().withMessage('parametre date cour introuvable')
+            .toDate(),
+        body('heureCour', 'date de cours invalide').optional()
+            .toDate(),
+
+        body('matiere', 'Matiere saisi est invalide')
+            .exists().withMessage('parametre matiere introuvable').trim().escape(),
+        body('description', 'description saisi est invalide')
+            .exists().withMessage('parametre description introuvable').trim().escape(),
     ]
 }
 

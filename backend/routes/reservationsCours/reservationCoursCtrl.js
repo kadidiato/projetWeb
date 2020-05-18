@@ -45,9 +45,8 @@ function getById(req, res, next) {
  */
 function save(req, res, next) {
     //recuperation des infos du cours à creer
-    let cours = {
+    let reservation = {
         datereservation: req.body.datereservation,
-        //heureCour: req.body.heureCour,
         EleveId: req.body.eleveId,
         CoursId: req.body.CoursId
     };
@@ -56,7 +55,7 @@ function save(req, res, next) {
     models.Reservation.create(reservation).then((newReservation) => {
         if (!newReservation) {
             return res.status(500).json({
-                message: 'Une erreur est survenue lors de la création du cours'
+                message: 'Une erreur est survenue lors de la création reservation'
             });
         }
 

@@ -13,7 +13,7 @@ router.get('/:id', validerProfs.getById(), validerProfs.validate, profsCtrl.getB
 
 //route pour créer un cours
 //url: POST /api/prof
-router.post('/', validerProfs.save, validerProfs.validate, profsCtrl.save)
+router.post('/', validerProfs.save(), validerProfs.validate, profsCtrl.save)
 
 //route pour supprimer un cours
 //url: DELETE /api/prof/:id

@@ -49,23 +49,24 @@ function save(req, res, next) {
         nomProf: req.body.nomProf,
         prenomProf: req.body.prenomProf,
         mailProf: req.body.mailProf,
+        matiereProf: req.body.matiereProf,
         // a enlever cette parti pour faire la table nottation
         nbAvisPos: req.body.nbAvisPos,
         nbAvisNeg: req.body.nbAvisNeg,
-      //
+        //
         niveauEProf: req.body.niveauEProf,
         rueProf: req.body.rueProf,
         villeProf: req.body.villeProf,
         zipProf: req.body.zipProf,
         paysProf: req.body.paysProf,
-        
+
     };
 
     //insertion dans la base de données
     models.Prof.create(prof).then((newProf) => {
         if (!newProf) {
             return res.status(500).json({
-                message: 'Une erreur est survenue lors de la création du cours'
+                message: 'Une erreur est survenue lors de l insertion du prof'
             });
         }
 
@@ -84,7 +85,7 @@ function save(req, res, next) {
 function destroy(req, res, next) {
     let pof_id = req.params.id;
 
-    models.eleve.destroy({
+    models.Prof.destroy({
         where: {id: pof_id}
     }).then((destroyedProf) => {
         return res.status(200).json(destroyedProf);
@@ -105,16 +106,17 @@ function update(req, res, next) {
         nomProf: req.body.nomProf,
         prenomProf: req.body.prenomProf,
         mailProf: req.body.mailProf,
+        matiereProf: req.body.matiereProf,
         // a enlever cette parti pour faire la table nottation
         nbAvisPos: req.body.nbAvisPos,
         nbAvisNeg: req.body.nbAvisNeg,
-      //
+        //
         niveauEProf: req.body.niveauEProf,
         rueProf: req.body.rueProf,
         villeProf: req.body.villeProf,
         zipProf: req.body.zipProf,
         paysProf: req.body.paysProf,
-        
+
     };
 
     models.Prof.update(prof, {
