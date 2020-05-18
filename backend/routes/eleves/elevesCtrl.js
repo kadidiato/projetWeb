@@ -46,15 +46,15 @@ function getById(req, res, next) {
 function save(req, res, next) {
     //recuperation des infos du cours à creer
     let eleve = {
-        nomEleve: req.body.nomEleve,
-        prenomEleve: req.body.prenomEleve,
+        nomEleve: req.body.nomEleve || "",
+        prenomEleve: req.body.prenomEleve || "",
         mailEleve: req.body.mailEleve,
-        niveauEleve: req.body.niveauEleve,
-        rueEleve: req.body.rueEleve,
-        villeEleve: req.body.villeEleve,
-        zipEleve: req.body.zipEleve,
-        paysEleve: req.body.paysEleve,
-        
+        niveauEleve: req.body.niveauEleve || "",
+        rueEleve: req.body.rueEleve || "",
+        villeEleve: req.body.villeEleve || "",
+        zipEleve: req.body.zipEleve || "",
+        paysEleve: req.body.paysEleve || "",
+
     };
 
     //insertion dans la base de données

@@ -6,6 +6,7 @@ import {ForgotPasswordComponent} from "./Components/forgot-password/forgot-passw
 import {ListCoursComponent} from "./Components/list-cours/list-cours.component";
 import {DisponibiliteComponent} from "./Components/disponibilite/disponibilite.component";
 import {DetailCourComponent} from "./Components/list-cours/detail-cour/detail-cour.component";
+import {ProfilComponent} from "./Components/profil/profil.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'listCours/details/:id', component: DetailCourComponent},
   // {path: 'ajoutcours', component: AjoutCoursComponent },
   {path: 'disponibilite', component: DisponibiliteComponent},
+  {path: 'profil', component: ProfilComponent},
 ];
 
 @NgModule({
