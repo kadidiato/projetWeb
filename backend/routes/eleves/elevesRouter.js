@@ -24,6 +24,8 @@ router.delete('/:id', validerEleves.getById(),
 
 //route pour mettre à jour un cours
 //url: PUT /api/reservationsCours
-router.put('/', validerEleves.save, validerEleves.validate, eleveCtrl.update)
+//router.put('/', validerEleves.save, validerEleves.validate, eleveCtrl.update)
+
+router.put('/', validerEleves.save(), validerEleves.validate, eleveCtrl.update);
 
 module.exports = router;

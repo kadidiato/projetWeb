@@ -20,8 +20,6 @@ export class ListCoursComponent implements OnInit {
 
   async init() {
     this.coursServiece.getCoursBe().subscribe(res => {
-      console.log('cours reçu ');
-      console.log(res);
       this.cours = res;
       console.log(this.cours);
     }, err => {

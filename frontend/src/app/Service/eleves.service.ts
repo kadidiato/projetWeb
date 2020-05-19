@@ -35,7 +35,7 @@ export class ElevesService {
   }
 
   updateEleve(eleve): Observable<Eleves> {
-    return this.http.put<Eleves>(`${this.url}`, eleve);
+    return this.http.put<Eleves>(`${this.url}/eleves`, eleve);
   }
 
 

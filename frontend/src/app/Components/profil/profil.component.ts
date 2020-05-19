@@ -11,7 +11,7 @@ import {ElevesService} from "../../Service/eleves.service";
 })
 export class ProfilComponent implements OnInit {
   eleve: Eleves; // l'utilisateur courant
-  prof: Prof; // l'utilisateur courant
+  afficherDialog = false; // boolean pour ouvrir et fermer le dialogue pop up
   userPhoto: Eleves = { // je stock la photo de profil recuperer dans firebase
     photo: '',
   };
@@ -39,28 +39,14 @@ export class ProfilComponent implements OnInit {
     });
   }
 
-  /*  getAllEleves() {
-      this.elevesService.getAllEleve().subscribe(res => {
-        this.eleves = res;
-        console.log('AllEleve');
-        console.log(res);
-        console.log(this.eleveId);
-
-        let el = this.getEleveById(1, this.eleves);
-
-        this.eleveId = el.id;
-        console.log(this.eleveId);
-
-        console.log('getEleveById');
-        console.log(this.getEleveById(1, this.eleves));
-        this.init(this.eleveId);
-      }, error => {
-        console.log(error);
-      });
-    }*/
 
   afficherDialogProfil() {
+    this.afficherDialog = true;
 
+  }
+
+  onHideProfilDialog(): void {
+    this.afficherDialog = false;
   }
 
   /*  getEleveById(id, tableeau) {

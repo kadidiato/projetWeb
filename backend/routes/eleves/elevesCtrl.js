@@ -125,6 +125,7 @@ function update(req, res, next) {
     let eleve = {
         nomEleve: req.body.nomEleve,
         prenomEleve: req.body.prenomEleve,
+        uid: req.body.uid,
         mailEleve: req.body.mailEleve,
         niveauEleve: req.body.niveauEleve,
         rueEleve: req.body.rueEleve,
@@ -139,6 +140,7 @@ function update(req, res, next) {
     models.Eleve.update(eleve, {
         where: {id: id}
     }).then((updatedEleve) => {
+        console.log(updatedEleve);
         return res.status(200).json(updatedEleve);
     }).catch((err) => {
         return res.status(500).json(err);
