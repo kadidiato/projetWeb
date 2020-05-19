@@ -28,9 +28,9 @@ function getAll(req, res, next) {
  * @param next
  */
 function getById(req, res, next) {
-    let id = req.params.id;
+    let uid = req.params.uid;
 
-    models.Eleve.findByPk(id).then((eleveFound) => {
+    models.Eleve.findByPk(uid).then((eleveFound) => {
         return res.json(eleveFound)
     }).catch((err) => {
         return res.json(err);
@@ -46,9 +46,10 @@ function getById(req, res, next) {
 function save(req, res, next) {
     //recuperation des infos du cours à creer
     let eleve = {
+        uid: req.body.uid,
+        mailEleve: req.body.mailEleve,
         nomEleve: req.body.nomEleve || "",
         prenomEleve: req.body.prenomEleve || "",
-        mailEleve: req.body.mailEleve,
         niveauEleve: req.body.niveauEleve || "",
         rueEleve: req.body.rueEleve || "",
         villeEleve: req.body.villeEleve || "",
@@ -57,17 +58,33 @@ function save(req, res, next) {
 
     };
 
-    //insertion dans la base de données
-    models.Eleve.create(eleve).then((newEleve) => {
-        if (!newEleve) {
-            return res.status(500).json({
-                message: 'Une erreur est survenue lors de la création du cours'
+    models.Eleve.findOne({
+        where: {uid: eleve.uid}
+    }).then((eleveFound) => {
+        if (eleveFound) {
+            return res.status(400).json({
+                status: 'error',
+                message: `Un eleve existe déjà avec ce id`
             });
         }
+        models.Eleve.create(eleve).then((newEleve) => {
+            if (!newEleve) {
+                return res.status(500).json({
+                    message: 'Une erreur est survenue lors de la création du cours'
+                });
+            }
 
-        return res.status(201).json(newEleve);
+            return res.status(201).json(newEleve);
+        }).catch((err) => {
+            return res.status(500).json(err);
+        });
     }).catch((err) => {
-        return res.status(500).json(err);
+        console.error(err);
+        return res.status(500).json({
+            status: 'error',
+            message: 'Une erreur interne est survenue lors de la récupération du client',
+            details: err.errors
+        });
     })
 }
 
@@ -108,7 +125,7 @@ function update(req, res, next) {
         paysEleve: req.body.paysEleve,
         datereservation: req.body.datereservation
         //heureCour: req.body.heureCour,
-        
+
     };
 
     models.Eleve.update(eleve, {
