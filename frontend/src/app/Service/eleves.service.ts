@@ -17,7 +17,7 @@ export class ElevesService {
     return this.http.get(`${this.url}/eleves`);
   }
 
-  getEleveByid(id: number) {
+  getEleveByid(id: string) {
     return this.http.get<Eleves>(`${this.url}/eleves/${id}`);
   }
 

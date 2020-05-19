@@ -28,10 +28,18 @@ function getAll(req, res, next) {
  * @param next
  */
 function getById(req, res, next) {
-    let uid = req.params.uid;
+    let uid = req.params.id;
 
-    models.Eleve.findByPk(uid).then((eleveFound) => {
-        return res.json(eleveFound)
+    models.Eleve.findOne({
+        where: {uid: uid}
+    }).then((eleveFound) => {
+        if (!eleveFound) {
+            return res.status(404).json({
+                status: 'error',
+                message: `eleve non trouvé`
+            });
+        }
+        return res.status(201).json(eleveFound);
     }).catch((err) => {
         return res.json(err);
     });
