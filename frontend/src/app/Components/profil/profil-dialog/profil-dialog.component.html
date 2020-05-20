@@ -1,0 +1,50 @@
+<p-dialog header="Profile" [(visible)]="afficherDialog" [modal]="true" [responsive]="true"
+          [style]="{width: '400px', minWidth: '250px'}" [minY]="90"
+          [maximizable]="true" [baseZIndex]="10000" (onHide)="onHide()">
+  <form #form="ngForm">
+    <div class="form-group">
+      <!--
+      <label for="nomEleve">Professeur</label>
+      <select [(ngModel)]="eleve.nomEleve" id="nomEleve" name="profId">
+        <option *ngFor="let prof of profs" [value]="prof.id">{{prof.id}}</option>
+      </select>-->
+    </div>
+    <div class="form-group">
+      <label for="nomEleve">Nom</label>
+      <input [(ngModel)]="eleve.nomEleve" class="form-control" id="nomEleve" name="nomEleve"
+             placeholder="Entrez le nom de l'eleve" required type="text">
+    </div>
+    <div class="form-group">
+      <label for="prenomEleve">Prenom</label>
+      <input [(ngModel)]="eleve.prenomEleve" class="form-control" id="prenomEleve" name="prenomEleve"
+             placeholder="Entrez le nom de l'eleve" required type="text">
+    </div>
+    <div class="form-group">
+      <label for="mailEleve">Mail</label>
+      <input [(ngModel)]="eleve.mailEleve" class="form-control" id="mailEleve" name="mailEleve"
+             placeholder="Entrez la date du cour" required type="text">
+    </div>
+    <div class="form-group">
+      <label for="paysEleve">Pays </label>
+      <input [(ngModel)]="eleve.paysEleve" class="form-control" id="paysEleve" name="niveauEleve"
+             placeholder="Entrez le niveau de l'eleve" required type="text">
+    </div>
+    <div class="form-group">
+      <label for="villeEleve">Ville </label>
+      <input [(ngModel)]="eleve.villeEleve" class="form-control" id="villeEleve" name="niveauEleve"
+             placeholder="Entrez le niveau de l'eleve" required type="text">
+    </div>
+    <div class="form-group">
+      <label for="niveauEleve">Niveau </label>
+      <input [(ngModel)]="eleve.niveauEleve" class="form-control" id="niveauEleve" name="niveauEleve"
+             placeholder="Entrez le niveau de l'eleve" required type="text">
+    </div>
+    <br>
+    <p-footer>
+      <button type="button" pButton (click)="ajouterEleve()" label="Ajouter"
+              class="ui-button-rounded" style="margin-right: 10px"></button>
+      <button type="button" pButton icon="fa fa-close" (click)="afficherDialog" label="Annuler"
+              class="ui-button-secondary ui-button-rounded" [disabled]="form.invalid"></button>
+    </p-footer>
+  </form>
+</p-dialog>
