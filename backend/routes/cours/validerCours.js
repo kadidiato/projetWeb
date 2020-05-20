@@ -1,7 +1,7 @@
 /**
  * https://express-validator.github.io/docs
  */
-const {body, check, validationResult} = require('express-validator');
+const { body, check, validationResult } = require('express-validator');
 
 /**
  * Utile quand on veut filter les entrées trouvées ou faire de la
@@ -34,6 +34,16 @@ const getById = () => {
     ];
 };
 
+const getByProfId = () => {
+    //console.log('get by id validator');
+    return [
+        check('profId', 'invalid parameter id')
+            .exists().withMessage('parameter id not found')
+            .isNumeric().withMessage('parameter id is not numeric')
+            .trim().escape(),
+    ];
+};
+
 /**
  * Regarde si un paramètre n'est pas fourni comme attendu et renvoie une
  * erreur et un message au client
@@ -48,7 +58,7 @@ const validate = (req, res, next) => {
         return next()
     }
     const extractedErrors = [];
-    errors.array().map(err => extractedErrors.push({[err.param]: err.msg}))
+    errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
 
     return res.status(422).json({
         errors: extractedErrors,
@@ -80,5 +90,5 @@ function save() {
 }
 
 module.exports = {
-    validate, getAll, getById, save
+    validate, getAll, getById, save, getByProfId
 };

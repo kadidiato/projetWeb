@@ -8,12 +8,12 @@ var models = require('../../models');
  */
 function getAll(req, res, next) {
     models.Eleve.findAll().then((eleve) => {
-        //si je trouve pas de cours je retourne un status 404 avec un petit message
+        //si je trouve pas d eleve je retourne un status 404 avec un petit message
         if (!eleve)
             return res.status(404).json({
                 message: 'aucun eleve  trouvé'
             });
-        //si tout s'est bien passé je retourne le status 200 et le cours trouvé
+        //si tout s'est bien passé je retourne le status 200 et le eleve trouvé
         return res.status(200).json(eleve);
     }).catch((err) => {
         //Erreur serveur => envoie erreur 500 et message au client
@@ -22,7 +22,7 @@ function getAll(req, res, next) {
 }
 
 /**
- * Controller pour recuperer un cours par son id
+ * Controller pour recuperer un eleve par son id
  * @param req
  * @param res
  * @param next
@@ -38,13 +38,13 @@ function getById(req, res, next) {
 }
 
 /**
- * Controller pour sauvegarder un ele
+ * Controller pour sauvegarder un eleve
  * @param req
  * @param res
  * @param next
  */
 function save(req, res, next) {
-    //recuperation des infos du cours à creer
+    //recuperation des infos du eleve à creer
     let eleve = {
         nomEleve: req.body.nomEleve || "",
         prenomEleve: req.body.prenomEleve || "",
@@ -61,7 +61,7 @@ function save(req, res, next) {
     models.Eleve.create(eleve).then((newEleve) => {
         if (!newEleve) {
             return res.status(500).json({
-                message: 'Une erreur est survenue lors de la création du cours'
+                message: 'Une erreur est survenue lors de la création d un elevers'
             });
         }
 
@@ -90,7 +90,7 @@ function destroy(req, res, next) {
 }
 
 /**
- * Controller pour mettre à jour un cours
+ * Controller pour mettre à jour les informations d'un  eleve
  * @param req
  * @param res
  * @param next

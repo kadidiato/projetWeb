@@ -34,6 +34,15 @@ const getById = () => {
     ];
 };
 
+const getByProfId = () => {
+    //console.log('get by id validator');
+    return [
+        check('profId', 'invalid parameter id')
+            .exists().withMessage('parameter id not found')
+            .isNumeric().withMessage('parameter id is not numeric')
+            .trim().escape(),
+    ];
+};
 /**
  * Regarde si un paramètre n'est pas fourni comme attendu et renvoie une
  * erreur et un message au client
@@ -80,5 +89,5 @@ function save() {
 }
 
 module.exports = {
-    validate, getAll, getById, save
+    validate, getAll, getById, save, getByProfId
 };
