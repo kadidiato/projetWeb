@@ -69,23 +69,21 @@ function save(req, res, next) {
     models.Eleve.findOne({
         where: {uid: eleve.uid}
     }).then((eleveFound) => {
-        if (eleveFound) {
-            return res.status(400).json({
-                status: 'error',
-                message: `Un eleve existe déjà avec ce id`
+        if (!eleveFound) {
+            models.Eleve.create(eleve).then((newEleve) => {
+                if (!newEleve) {
+                    return res.status(500).json({
+                        message: 'Une erreur est survenue lors de la création du cours'
+                    });
+                }
+                return res.status(201).json(newEleve);
+            }).catch((err) => {
+                return res.status(500).json(err);
             });
+        } else {
+            return res.status(200).json(eleveFound)
         }
-        models.Eleve.create(eleve).then((newEleve) => {
-            if (!newEleve) {
-                return res.status(500).json({
-                    message: 'Une erreur est survenue lors de la création du cours'
-                });
-            }
 
-            return res.status(201).json(newEleve);
-        }).catch((err) => {
-            return res.status(500).json(err);
-        });
     }).catch((err) => {
         console.error(err);
         return res.status(500).json({
