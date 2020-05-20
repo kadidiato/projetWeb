@@ -11,15 +11,26 @@
           </div>
 
           <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
+            <div class="md-form mb-2">
+              <select class="browser-default custom-select" formControlName="type" id="type"
+                      name="type">
+                <option [defaultSelected]="true" disabled value="">Selectionnez votre catégorie</option>
+                <option value="prof">Prof</option>
+                <option value="eleve">Elève</option>
+              </select>
+              <label for="type">Type</label>
+            </div>
+
             <div class="md-form">
-              <input type="text" id="elegantFormEmailEx" class="form-control" name="email"
+              <input class="form-control" name="email" type="text"
                      id="email" formControlName="email" mdbInput>
-              <label for="elegantFormEmailEx">Email</label>
+              <label for="email">Email</label>
             </div>
 
             <div class="md-form pb-3">
               <input type="password" id="elegantFormPasswordEx" class="form-control" name="password"
-                     id="password" formControlName="password" mdbInput>
+                     formControlName="password" mdbInput>
               <label for="elegantFormPasswordEx">Mot de passe </label>
             </div>
             <br>
@@ -41,14 +52,14 @@
           <div class="row my-3 d-flex justify-content-center">
             <!--Google +-->
             <button type="button" mdbBtn color="white" rounded="true" class="z-depth-1a waves-light" mdbWavesEffect
-                    (click)="loginGoogle()">
+                    (click)="loginGoogle()" [disabled]="!signInForm.get('type')">
               <mdb-icon fab fab icon="google-plus" class="blue-text"></mdb-icon>
             </button>
           </div>
         </mdb-card-body>
         <!--Footer-->
         <div class="modal-footer mx-5 pt-3 mb-1">
-          <p class="font-small grey-text d-flex justify-content-end">jé n'ai pas de compte?
+          <p class="font-small grey-text d-flex justify-content-end">je n'ai pas de compte?
             <a [routerLink]="['/register-user']" class="blue-text ml-1"> Créer un compte</a>
           </p>
         </div>

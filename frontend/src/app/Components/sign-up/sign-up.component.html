@@ -12,6 +12,16 @@
 
           <form class="omb_loginForm"  [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
+            <div class="md-form mb-2">
+              <select class="form-control" formControlName="type" id="type"
+                      name="type">
+                <option disabled selected value="">Selectionnez votre catégorie</option>
+                <option value="prof">Prof</option>
+                <option value="eleve">Elève</option>
+              </select>
+              <label for="type">Type</label>
+            </div>
+
             <div class="md-form">
               <input type="text" id="email" name="username"  class="form-control"
                      formControlName="email" mdbInput>
