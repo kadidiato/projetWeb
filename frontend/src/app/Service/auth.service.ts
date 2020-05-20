@@ -16,11 +16,13 @@ function AlxToObjectString(data?: object): {[key: string]: string} {
 export class AuthService {
   api_redirect = '/back/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
+
   public user: User;
 
   private async get<T>(url: string, data: object): Promise<HttpResponse<T>> {
-    return this.http.get<T>( url, {
+    return this.http.get<T>(url, {
       observe: 'response',
       params: {...AlxToObjectString(data)}
     }).toPromise();
