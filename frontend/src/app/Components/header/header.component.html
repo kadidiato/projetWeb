@@ -45,7 +45,7 @@
             <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
               <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
             <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-              <a class="dropdown-item"  *ngIf="!isAuth">Connexion</a>
+              <a class="dropdown-item" [routerLink]="['/sign-in']" *ngIf="!isAuth">Connexion</a>
               <a class="dropdown-item" [routerLink]="['/profil']" *ngIf="isAuth">Profil</a>
               <a class="dropdown-item" (click)="onSignOut()" *ngIf="isAuth" >Deconnexion</a>
               <a class="dropdown-item" [routerLink]="['/register-user']" *ngIf="!isAuth" >Créer un compte</a>
