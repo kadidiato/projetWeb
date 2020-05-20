@@ -59,7 +59,7 @@ function save(req, res, next) {
         villeProf: req.body.villeProf,
         zipProf: req.body.zipProf,
         paysProf: req.body.paysProf,
-
+        uid: req.body.uid,
     };
 
     //insertion dans la base de données

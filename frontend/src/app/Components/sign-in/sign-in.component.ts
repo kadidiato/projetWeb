@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AuthService} from "../../Service/auth.service";
-import {MessageService} from "primeng";
 import {Router} from "@angular/router";
 import {auth} from "firebase";
 import {ElevesService} from "../../Service/eleves.service";
 import {Eleves} from "../../Interface/eleve";
+import {ProfService} from "../../Service/prof.service";
 
 
 @Component({
@@ -21,8 +21,8 @@ export class SignInComponent implements OnInit {
   isAuth: boolean;
 
   constructor(private afAuth: AngularFireAuth, private authService: AuthService,
-              private elevesService: ElevesService, private formBuilder: FormBuilder,
-              private route: Router) {
+              private profService: ProfService, private elevesService: ElevesService,
+              private formBuilder: FormBuilder, private route: Router) {
     afAuth.user.subscribe(u => console.log('L\'utilisateur est ', u));
   }
 
@@ -107,6 +107,16 @@ export class SignInComponent implements OnInit {
           nomEleve: eleve.displayName.substr(0, i),
           prenomEleve: eleve.displayName.substr(i),
           mailEleve: eleve.email,
+          photo: eleve.photoURL,
+          uid: eleve.uid,
+        }).then(data => {
+        });
+      } else {
+        this.profService.addProf({
+          // variable que le serveur s'attend a recevoir
+          nomProf: eleve.displayName.substr(0, i),
+          prenomProf: eleve.displayName.substr(i),
+          mailProf: eleve.email,
           photo: eleve.photoURL,
           uid: eleve.uid,
         }).then(data => {
