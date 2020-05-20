@@ -7,6 +7,7 @@ import {ListCoursComponent} from "./Components/list-cours/list-cours.component";
 import {DisponibiliteComponent} from "./Components/disponibilite/disponibilite.component";
 import {DetailCourComponent} from "./Components/list-cours/detail-cour/detail-cour.component";
 import {ProfilComponent} from "./Components/profil/profil.component";
+import {CourEleveComponent} from "./Components/cour-eleve/cour-eleve.component";
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   // {path: 'ajoutcours', component: AjoutCoursComponent },
   {path: 'disponibilite', component: DisponibiliteComponent},
   {path: 'profil', component: ProfilComponent},
+  {path: 'Cours', component: CourEleveComponent},
 ];
 
 @NgModule({
