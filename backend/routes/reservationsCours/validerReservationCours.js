@@ -91,5 +91,5 @@ function save() {
 }
 
 module.exports = {
-    validate, getAll, getById, save, getReservationByEleveId
+    validate, getAll, getById, save, getReservationByEleveId, 
 };

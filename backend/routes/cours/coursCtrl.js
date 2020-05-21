@@ -22,6 +22,7 @@ function getAll(req, res, next) {
     })
 }
 
+
 /**
  * Controller pour recuperer un cours par son id
  * @param req
