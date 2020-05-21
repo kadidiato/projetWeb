@@ -35,7 +35,7 @@
             </div>
             <br>
             <div class="text-center mb-3">
-              <button mdbBtn gradient="blue" block="true" rounded="true"
+              <button mdbBtn  block="true" rounded="true"
                       class="z-depth-1a waves-light" type="submit"
                       [disabled]="signInForm.invalid"
                       >Connexion
@@ -51,7 +51,7 @@
 
           <div class="row my-3 d-flex justify-content-center">
             <!--Google +-->
-            <button type="button" mdbBtn color="white" rounded="true" class="z-depth-1a waves-light" mdbWavesEffect
+            <button type="button" mdbBtn color="back" rounded="true" class="z-depth-1a waves-light" mdbWavesEffect
                     (click)="loginGoogle()" [disabled]="!signInForm.get('type')">
               <mdb-icon class="blue-text" fab icon="google-plus"></mdb-icon>
             </button>
