@@ -9,23 +9,12 @@ import {AuthService} from "../../Service/auth.service";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isAuth: boolean;
-  type: string;
 
   constructor(private afAuth: AngularFireAuth, private route: Router, private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.afAuth.auth.onAuthStateChanged(
-      (user) => {
-        if (user) {
-          this.type = localStorage.getItem('type');
-          this.isAuth = true;
-        } else {
-          this.isAuth = false;
-        }
-      }
-    );
+    this.authService.checkAuthState();
   }
 
 
