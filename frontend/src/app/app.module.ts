@@ -32,7 +32,7 @@ import {NgxSelectModule} from "ngx-select-ex";
 import {ProfilComponent} from './Components/profil/profil.component';
 import {ProfilDialogComponent} from './Components/profil/profil-dialog/profil-dialog.component';
 import {CourEleveComponent} from './Components/cour-eleve/cour-eleve.component';
-import { HomeComponent } from './Components/home/home.component';
+import {ProfDiaolgComponent} from './Components/profil/prof-diaolg/prof-diaolg.component';
 
 
 @NgModule({
@@ -50,7 +50,7 @@ import { HomeComponent } from './Components/home/home.component';
     ProfilComponent,
     ProfilDialogComponent,
     CourEleveComponent,
-    HomeComponent
+    ProfDiaolgComponent
   ],
   imports: [
     BrowserModule,

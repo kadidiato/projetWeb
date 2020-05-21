@@ -10,7 +10,7 @@ import {AuthService} from "../../Service/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private afAuth: AngularFireAuth, private route: Router, private authService: AuthService) {
+  constructor(private afAuth: AngularFireAuth, private route: Router, public authService: AuthService) {
   }
 
   ngOnInit(): void {
