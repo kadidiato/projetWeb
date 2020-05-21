@@ -2,9 +2,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light blue-grey lighten-5" [containerInside]="false">
 
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">
-    <img alt="Courslogo" src="../../assets/favicon.ico" style="width:40px;">
-  </a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" href="#">logo</a></mdb-navbar-brand>
 
   <!-- Collapsible content -->
   <links>
@@ -12,23 +10,16 @@
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-
-       <!--  <a class="nav-link waves-light" mdbWavesEffect routerLink="Cours">Parametrage Cours<span
- -->
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="historique-cours">Parametrage Cours<span
-
-          class="sr-only"></span></a>
+        <a *ngIf="type === 'prof'" class="nav-link waves-light" mdbWavesEffect routerLink="historique-cours">
+          Parametrage Cours<span class="sr-only"></span>
+        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="disponibilite">Disponibilites</a>
       </li>
 
       <li class="nav-item">
-
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="listCours">Cours</a>
-
-        <!-- <a class="nav-link waves-light" mdbWavesEffect routerLink="cours">Cours</a> -->
-
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="cours">Cours</a>
       </li>
 
       <!-- Dropdown -->
