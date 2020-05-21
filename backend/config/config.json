@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "phpmyadmin",
-    "password": "root",
-    "database": "kadi_api",
+    "username": "root",
+    "password": "",
+    "database": "database_api",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
