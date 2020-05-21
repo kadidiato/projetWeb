@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Cours} from "../../../Interface/cours";
 import {Eleves} from "../../../Interface/eleve";
 import {ElevesService} from "../../../Service/eleves.service";
+import {Prof} from "../../../Interface/Prof";
 
 @Component({
   selector: 'app-profil-dialog',
@@ -14,6 +15,7 @@ export class ProfilDialogComponent implements OnInit {
    * reference vers l'utilisateur
    */
   @Input() eleve: Eleves;
+  @Input() prof: Prof;
 
   /**
    * boolean pour afficher le dialog

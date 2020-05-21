@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Eleves} from "../../Interface/eleve";
 import {AngularFireAuth} from "@angular/fire/auth";
 import {ElevesService} from "../../Service/eleves.service";
+import {ProfService} from "../../Service/prof.service";
+import {Prof} from "../../Interface/Prof";
 
 @Component({
   selector: 'app-profil',
@@ -9,14 +11,16 @@ import {ElevesService} from "../../Service/eleves.service";
   styleUrls: ['./profil.component.scss']
 })
 export class ProfilComponent implements OnInit {
-  eleve: Eleves; // l'utilisateur courant
-  afficherDialog = false; // boolean pour ouvrir et fermer le dialogue pop up
+  eleve: Eleves;
+  prof: Prof;
+  afficherDialog = false;
   userPhoto: Eleves = { // je stock la photo de profil recuperer dans firebase
     photo: '',
   };
   type: string;
 
-  constructor(private afAuth: AngularFireAuth, private elevesService: ElevesService) {
+  constructor(private afAuth: AngularFireAuth, private elevesService: ElevesService,
+              private  profService: ProfService) {
   }
 
   ngOnInit(): void {
@@ -40,12 +44,11 @@ export class ProfilComponent implements OnInit {
           }, r => {
             console.log('errr' + r);
           });
-        } else {
+        } else if (this.type === 'prof') {
           // get du prof
-          this.elevesService.getEleveByid(u.uid).subscribe(res => {
-            this.eleve = res;
-            console.log("this.eleve");
-            console.log(this.eleve);
+          this.profService.getProfByid(u.uid).subscribe(res => {
+            this.prof = res;
+            console.log(this.prof);
             this.userPhoto.photo = u.photoURL;
           }, r => {
             console.log('errr' + r);
