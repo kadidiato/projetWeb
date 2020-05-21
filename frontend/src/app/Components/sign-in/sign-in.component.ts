@@ -108,6 +108,7 @@ export class SignInComponent implements OnInit {
           prenomEleve: eleve.displayName.substr(i),
           mailEleve: eleve.email,
           photo: eleve.photoURL,
+          uid: eleve.uid,
         }).then(data => {
         });
       }

@@ -17,8 +17,8 @@ export class ElevesService {
     return this.http.get(`${this.url}/eleves`);
   }
 
-  getEleveByid(id: number) {
-    return this.http.get<Eleves>(`${this.url}/${id}`);
+  getEleveByid(id: string) {
+    return this.http.get<Eleves>(`${this.url}/eleves/${id}`);
   }
 
   /*  addEleve(eleve: Eleves): Observable<Eleves> {
@@ -35,7 +35,7 @@ export class ElevesService {
   }
 
   updateEleve(eleve): Observable<Eleves> {
-    return this.http.put<Eleves>(`${this.url}`, eleve);
+    return this.http.put<Eleves>(`${this.url}/eleves`, eleve);
   }
 
 

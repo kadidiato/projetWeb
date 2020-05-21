@@ -28,10 +28,18 @@ function getAll(req, res, next) {
  * @param next
  */
 function getById(req, res, next) {
-    let id = req.params.id;
+    let uid = req.params.id;
 
-    models.Eleve.findByPk(id).then((eleveFound) => {
-        return res.json(eleveFound)
+    models.Eleve.findOne({
+        where: {uid: uid}
+    }).then((eleveFound) => {
+        if (!eleveFound) {
+            return res.status(404).json({
+                status: 'error',
+                message: `eleve non trouvé`
+            });
+        }
+        return res.status(201).json(eleveFound);
     }).catch((err) => {
         return res.json(err);
     });
@@ -46,9 +54,10 @@ function getById(req, res, next) {
 function save(req, res, next) {
     //recuperation des infos du eleve à creer
     let eleve = {
+        uid: req.body.uid,
+        mailEleve: req.body.mailEleve,
         nomEleve: req.body.nomEleve || "",
         prenomEleve: req.body.prenomEleve || "",
-        mailEleve: req.body.mailEleve,
         niveauEleve: req.body.niveauEleve || "",
         rueEleve: req.body.rueEleve || "",
         villeEleve: req.body.villeEleve || "",
@@ -57,17 +66,34 @@ function save(req, res, next) {
 
     };
 
-    //insertion dans la base de données
-    models.Eleve.create(eleve).then((newEleve) => {
-        if (!newEleve) {
-            return res.status(500).json({
-                message: 'Une erreur est survenue lors de la création d un elevers'
+    models.Eleve.findOne({
+        where: {uid: eleve.uid}
+    }).then((eleveFound) => {
+        if (eleveFound) {
+            return res.status(400).json({
+                status: 'error',
+                message: `Un eleve existe déjà avec ce id`
+
             });
         }
+        models.Eleve.create(eleve).then((newEleve) => {
+            if (!newEleve) {
+                return res.status(500).json({
+                    message: 'Une erreur est survenue lors de la création du cours'
+                });
+            }
 
-        return res.status(201).json(newEleve);
+            return res.status(201).json(newEleve);
+        }).catch((err) => {
+            return res.status(500).json(err);
+        });
     }).catch((err) => {
-        return res.status(500).json(err);
+        console.error(err);
+        return res.status(500).json({
+            status: 'error',
+            message: 'Une erreur interne est survenue lors de la récupération du client',
+            details: err.errors
+        });
     })
 }
 
@@ -100,6 +126,7 @@ function update(req, res, next) {
     let eleve = {
         nomEleve: req.body.nomEleve,
         prenomEleve: req.body.prenomEleve,
+        uid: req.body.uid,
         mailEleve: req.body.mailEleve,
         niveauEleve: req.body.niveauEleve,
         rueEleve: req.body.rueEleve,
@@ -108,12 +135,13 @@ function update(req, res, next) {
         paysEleve: req.body.paysEleve,
         datereservation: req.body.datereservation
         //heureCour: req.body.heureCour,
-        
+
     };
 
     models.Eleve.update(eleve, {
         where: {id: id}
     }).then((updatedEleve) => {
+        console.log(updatedEleve);
         return res.status(200).json(updatedEleve);
     }).catch((err) => {
         return res.status(500).json(err);

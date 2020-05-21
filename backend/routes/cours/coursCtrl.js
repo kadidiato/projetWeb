@@ -39,7 +39,8 @@ function getById(req, res, next) {
 }
 
 function getByProfId(req, res, next) {
-    let prof = req.params.id;
+    let prof = req.params.profId;
+
     models.Cours.findAll({
         where: { profId: prof }
     }).then((cours) => {
@@ -77,6 +78,10 @@ function save(req, res, next) {
         heureCour: req.body.heureCour || null,
         matiere: req.body.matiere,
         description: req.body.description,
+        description: req.body.description,
+        prix_cours_heure: req.body.prix_cours_heure,
+        status: req.body.status
+
     };
 
     models.Prof.findOne({
@@ -143,10 +148,12 @@ function update(req, res, next) {
     let cours = {
         dateCour: req.body.dateCour,
         heureCour: req.body.heureCour,
-        // EleveId: req.body.eleveId,
         ProfId: req.body.profId,
         matiere: req.body.matiere,
         description: req.body.description,
+        prix_cours_heure: req.body.prix_cours_heure,
+        status: req.body.status,
+
     };
 
     models.Cours.update(cours, {

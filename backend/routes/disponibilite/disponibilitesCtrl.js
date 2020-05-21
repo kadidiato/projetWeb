@@ -74,14 +74,14 @@ function save(req, res, next) {
  * @param next
  */
 function getByProfId(req, res, next) {
-    let prof = req.params.id;
+    let prof = req.params.profId;
     models.Cours.findAll({
         where: { profId: prof }
     }).then((disponibilite) => {
         //si je trouve pas de cours je retourne un status 404 avec un petit message
         if (!disponibilite)
             return res.status(404).json({
-                message: 'aucun cours trouvé'
+                message: 'aucun Disponibilite trouvé'
             });
         //si tout s'est bien passé je retourne le status 200 et le cours trouvé
         return res.status(200).json(disponibilite);

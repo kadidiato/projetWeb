@@ -20,10 +20,9 @@ router.post('/', validerEleves.save(), validerEleves.validate, eleveCtrl.save)
 router.delete('/:id', validerEleves.getById(),
     validerEleves.validate,
     eleveCtrl.destroy);
-
-
 //route pour mettre à jour un eleve
 //url: PUT /api/eleves
 router.put('/', validerEleves.save(), validerEleves.validate, eleveCtrl.update)
+
 
 module.exports = router;

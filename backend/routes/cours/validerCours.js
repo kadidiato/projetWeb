@@ -86,6 +86,12 @@ function save() {
             .exists().withMessage('parametre matiere introuvable').trim().escape(),
         body('description', 'description saisi est invalide')
             .exists().withMessage('parametre description introuvable').trim().escape(),
+        body('prix_cours_heure', ' parametre prix invalide')
+            .not().isEmpty().withMessage('parametre profId ne doit pas etre vide')
+            .trim().escape(),
+        body('status', ' parametre stutus invalide')
+            .not().isEmpty().withMessage('parametre profId ne doit pas etre vide')
+            .trim().escape(),
     ]
 }
 
