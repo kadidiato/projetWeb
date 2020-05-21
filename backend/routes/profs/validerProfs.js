@@ -61,22 +61,14 @@ const validate = (req, res, next) => {
  */
 function save() {
     return [
-        body('nomProf', 'Nom saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
-        body('prenomProf', 'Prenom saisi est invalide')
-            .exists().withMessage('parametre mail introuvable').trim().escape(),
+        body('nomProf', 'Nom saisi est invalide').optional().trim().escape(),
+        body('prenomProf', 'Prenom saisi est invalide').optional().trim().escape(),
         body('mailProf', 'matiereProf saisi est invalide')
             .exists().withMessage('parametre heureCour introuvable').trim().escape(),
         body('uid', 'uid introuvable')
             .exists().withMessage('parametre uid introuvable').trim().escape(),
 
         body('matiereProf', 'matiereProf saisi est invalide').optional().trim().escape(),
-        body('nbAvisPos', 'invalid parameter id').optional()
-            .isNumeric().withMessage('parametre eleveId doit être numérique')
-            .trim().escape(),
-        body('nbAvisNeg', 'invalid parameter id').optional()
-            .isNumeric().withMessage('parametre coursId doit être numérique')
-            .trim().escape(),
         body('niveauProf', 'niveauProf saisi est invalide').optional().trim().escape(),
         body('rueProf', 'rueProf saisi est invalide').optional().trim().escape(),
         body('villeProf', 'ville saisi est invalide').optional().trim().escape(),

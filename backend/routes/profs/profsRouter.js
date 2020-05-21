@@ -25,6 +25,6 @@ router.delete('/:id', validerProfs.getById(),
 
 //route pour mettre à jour un cours
 //url: PUT /api/prof
-router.put('/', validerProfs.save, validerProfs.validate, profsCtrl.update);
+router.put('/', validerProfs.save(), validerProfs.validate, profsCtrl.update);
 
 module.exports = router;
