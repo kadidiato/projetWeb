@@ -4,10 +4,10 @@ import {ProfService} from "../../../Service/prof.service";
 
 @Component({
   selector: 'app-prof-diaolg',
-  templateUrl: './prof-diaolg.component.html',
-  styleUrls: ['./prof-diaolg.component.scss']
+  templateUrl: './profil-prof-diaolg.component.html',
+  styleUrls: ['./profil-prof-diaolg.component.scss']
 })
-export class ProfDiaolgComponent implements OnInit {
+export class ProfilProfDiaolgComponent implements OnInit {
 
   @Input() prof: Prof;
 

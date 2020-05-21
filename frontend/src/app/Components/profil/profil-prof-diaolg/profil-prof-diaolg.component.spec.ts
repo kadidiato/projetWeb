@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ProfDiaolgComponent} from './prof-diaolg.component';
+import {ProfilProfDiaolgComponent} from './profil-prof-diaolg.component';
 
 describe('ProfDiaolgComponent', () => {
-  let component: ProfDiaolgComponent;
-  let fixture: ComponentFixture<ProfDiaolgComponent>;
+  let component: ProfilProfDiaolgComponent;
+  let fixture: ComponentFixture<ProfilProfDiaolgComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProfDiaolgComponent]
+      declarations: [ProfilProfDiaolgComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfDiaolgComponent);
+    fixture = TestBed.createComponent(ProfilProfDiaolgComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
