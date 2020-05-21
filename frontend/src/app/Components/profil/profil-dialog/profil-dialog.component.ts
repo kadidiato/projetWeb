@@ -3,6 +3,7 @@ import {Cours} from "../../../Interface/cours";
 import {Eleves} from "../../../Interface/eleve";
 import {ElevesService} from "../../../Service/eleves.service";
 import {Prof} from "../../../Interface/Prof";
+import {ProfService} from "../../../Service/prof.service";
 
 @Component({
   selector: 'app-profil-dialog',
@@ -27,7 +28,9 @@ export class ProfilDialogComponent implements OnInit {
    */
   @Output() onDialogHide = new EventEmitter(true);
 
-  constructor(private elevesService: ElevesService) {
+  type: string;
+
+  constructor(private elevesService: ElevesService, private profService: ProfService) {
   }
 
   ngOnInit(): void {
@@ -38,13 +41,19 @@ export class ProfilDialogComponent implements OnInit {
   }
 
   ajouterEleve() {
-    this.elevesService.updateEleve(this.eleve).subscribe((response) => {
-      this.eleve = response;
-      this.afficherDialog = false;
-      console.log(this.eleve);
-    }, error => {
-      console.log(error);
-    });
+    this.type = localStorage.getItem('type');
+    if (this.type === 'eleve') {
+      this.elevesService.updateEleve(this.eleve).subscribe((response) => {
+        this.eleve = response;
+        this.afficherDialog = false;
+        console.log(this.eleve);
+      }, error => {
+        console.log(error);
+      });
+    } else {
+
+    }
+
 
   }
 }

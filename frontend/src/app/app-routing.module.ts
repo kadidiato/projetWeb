@@ -24,7 +24,7 @@ const routes: Routes = [
   // {path: 'ajoutcours', component: AjoutCoursComponent },
   {path: 'disponibilite', component: DisponibiliteComponent, canActivate: [AuthGuard]},
   {path: 'profil', component: ProfilComponent, canActivate: [AuthGuard]},
-  {path: 'cours', component: CourEleveComponent, canActivate: [AuthGuard]},
+  {path: 'cours', component: CourEleveComponent },
 ];
 
 @NgModule({

@@ -36,6 +36,33 @@ function getById(req, res, next) {
         return res.json(err);
     });
 }
+/**
+ * Controller pour recuperer les  cours reservent  par  un eleve grace a son id
+ * @param req
+ * @param res
+ * @param next
+ */
+
+function getReservationByEleveId(req, res, next) {
+    let eleve = req.params.eleveId;
+
+    models.Reservation.findAll({
+        where: { eleveId: eleve }
+    }).then((reservation) => {
+        //si je trouve pas de cours je retourne un status 404 avec un petit message
+        if (!reservation)
+            return res.status(404).json({
+                message: 'aucun cours reservé trouvé'
+            });
+        //si tout s'est bien passé je retourne le status 200 et le cours trouvé
+        return res.status(200).json(reservation);
+    }).catch((err) => {
+        //Erreur serveur => envoie erreur 500 et message au client
+        return res.status(500).json(err);
+    });
+
+}
+
 
 /**
  * Controller pour sauvegarder un cours
@@ -108,5 +135,5 @@ function update(req, res, next) {
 }
 
 module.exports = {
-    getAll, getById, save, destroy, update
+    getAll, getById, save, destroy, update, getReservationByEleveId
 };
