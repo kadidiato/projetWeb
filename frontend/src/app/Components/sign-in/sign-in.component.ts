@@ -45,8 +45,6 @@ export class SignInComponent implements OnInit {
    */
   loginGoogle() {
     this.type = this.signInForm.get('type').value;
-    console.log('type');
-    console.log(this.type);
     if (this.type) {
       this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
         u => {
