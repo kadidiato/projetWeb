@@ -31,14 +31,14 @@
             <div class="md-form pb-3">
               <input type="password" id="elegantFormPasswordEx" class="form-control" name="password"
                      formControlName="password" mdbInput>
-              <label for="elegantFormPasswordEx">Mot de passe </label>
+              <label class="password" for="elegantFormPasswordEx"> <a routerLink="#"> Mot de passe oublie </a></label>
             </div>
             <br>
             <div class="text-center mb-3">
               <button mdbBtn gradient="blue" block="true" rounded="true"
                       class="z-depth-1a waves-light" type="submit"
                       [disabled]="signInForm.invalid"
-                      mdbWavesEffect>Connexion
+                      >Connexion
               </button>
             </div>
           </form>
