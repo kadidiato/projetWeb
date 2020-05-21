@@ -13,9 +13,9 @@
           <form class="omb_loginForm"  [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
             <div class="md-form mb-2">
-              <select class="form-control" formControlName="type" id="type"
+              <select class="browser-default custom-select" formControlName="type" id="type"
                       name="type">
-                <option disabled selected value="">Selectionnez votre catégorie</option>
+                <option [defaultSelected]="true" disabled value="">Selectionnez votre catégorie</option>
                 <option value="prof">Prof</option>
                 <option value="eleve">Elève</option>
               </select>

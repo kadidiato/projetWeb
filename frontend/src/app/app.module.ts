@@ -1,9 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import {MDBBootstrapModule, NavbarModule} from 'angular-bootstrap-md';
 // Angular Forms Modules
-import {ReactiveFormsModule, FormsModule} from '@angular/forms'
-import {NavbarModule} from 'angular-bootstrap-md';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './Components/header/header.component';
@@ -11,7 +10,7 @@ import {SignInComponent} from './Components/sign-in/sign-in.component';
 import {FooterComponent} from './Components/footer/footer.component';
 import {ForgotPasswordComponent} from './Components/forgot-password/forgot-password.component';
 import {SignUpComponent} from './Components/sign-up/sign-up.component';
-import {ListCoursComponent} from './Components/list-cours/list-cours.component';
+import {HistoriqueCoursComponent} from './Components/list-cours/historique-cours.component';
 import {DisponibiliteComponent} from './Components/disponibilite/disponibilite.component';
 import {ButtonModule, DialogModule, TableModule} from "primeng";
 
@@ -43,7 +42,7 @@ import {CourEleveComponent} from './Components/cour-eleve/cour-eleve.component';
     FooterComponent,
     ForgotPasswordComponent,
     SignUpComponent,
-    ListCoursComponent,
+    HistoriqueCoursComponent,
     DisponibiliteComponent,
     DetailCourComponent,
     DialogCourComponent,

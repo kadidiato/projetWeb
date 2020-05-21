@@ -6,7 +6,7 @@
   </h1>
   <br>
   <div class="row">
-    <div class="col-8">
+    <div *ngIf="type === 'eleve'" class="col-8">
       <div class="border-primary ">
         <div class="card-header ">
           <h3 class="card-title">
@@ -47,7 +47,7 @@
         </ng-template>
       </div>
     </div>
-    <div class="col-4 ">
+    <div [class.col-12]="type === 'prof'" [class.col-4]="type === 'eleve'">
       <div class="border-primary ">
         <div class="card-header">
           <h3 class="card-title">
@@ -60,7 +60,8 @@
           </p>
           <h4>{{eleve?.nomEleve}} {{eleve?.prenomEleve}}</h4>
           <p>
-            <button type="button" class="btn btn-success" (click)="afficherDialogProfil()">
+            <button (click)="afficherDialogProfil()" [class.btn-float]="type === 'prof'" class="btn btn-success"
+                    type="button">
               <i class="fa fa-user"></i>
               Modifier Vos informations
             </button>
@@ -86,5 +87,5 @@
 
     </div>
   </div>
-<app-profil-dialog [afficherDialog]="afficherDialog" [eleve]="eleve"
+<app-profil-dialog *ngIf="eleve" [afficherDialog]="afficherDialog" [eleve]="eleve"
                    (onDialogHide)="onHideProfilDialog()"></app-profil-dialog>

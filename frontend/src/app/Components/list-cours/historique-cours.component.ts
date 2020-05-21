@@ -3,10 +3,10 @@ import {CoursService} from "../../Service/cours.service";
 
 @Component({
   selector: 'app-list-cours',
-  templateUrl: './list-cours.component.html',
-  styleUrls: ['./list-cours.component.scss']
+  templateUrl: './historique-cours.component.html',
+  styleUrls: ['./historique-cours.component.scss']
 })
-export class ListCoursComponent implements OnInit {
+export class HistoriqueCoursComponent implements OnInit {
 
   cours: any[];
   afficherDialog = false; // boolean pour ouvrir et fermer le dialogue pop up
