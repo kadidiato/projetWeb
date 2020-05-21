@@ -1,6 +1,6 @@
-<p-dialog header="Profile" [(visible)]="afficherDialog" [modal]="true" [responsive]="true"
-          [style]="{width: '400px', minWidth: '250px'}" [minY]="90"
-          [maximizable]="true" [baseZIndex]="10000" (onHide)="onHide()">
+<p-dialog (onHide)="onHide()" [(visible)]="afficherDialog" [baseZIndex]="10000" [maximizable]="true"
+          [minY]="90" [modal]="true"
+          [responsive]="true" [style]="{width: '400px', minWidth: '250px'}" header="Profile">
   <form #form="ngForm">
     <div class="form-group">
       <label for="profId">Professeur</label>
@@ -34,10 +34,11 @@
     </div>
     <br>
     <p-footer>
-      <button type="button" pButton (click)="ajouterCour()" label="Ajouter"
-              class="ui-button-rounded" style="margin-right: 10px"></button>
-      <button type="button" pButton icon="fa fa-close" (click)="afficherDialog=false" label="Annuler"
-              class="ui-button-secondary ui-button-rounded" [disabled]="form.invalid"></button>
+      <button (click)="ajouterCour()" class="ui-button-rounded" label="Ajouter" pButton
+              style="margin-right: 10px" type="button"></button>
+      <button (click)="afficherDialog=false" [disabled]="form.invalid" class="ui-button-secondary ui-button-rounded"
+              icon="fa fa-close" label="Annuler"
+              pButton type="button"></button>
     </p-footer>
   </form>
 </p-dialog>
