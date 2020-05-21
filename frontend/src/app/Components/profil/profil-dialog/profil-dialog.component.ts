@@ -40,20 +40,27 @@ export class ProfilDialogComponent implements OnInit {
     this.onDialogHide.emit();
   }
 
-  ajouterEleve() {
+  ajoutEleve() {
     this.type = localStorage.getItem('type');
+    console.log("valeur type dans le dialog");
+    console.log(this.type);
     if (this.type === 'eleve') {
       this.elevesService.updateEleve(this.eleve).subscribe((response) => {
         this.eleve = response;
         this.afficherDialog = false;
-        console.log(this.eleve);
+        console.log("update eleve ok");
       }, error => {
         console.log(error);
       });
-    } else {
-
+    } else if (this.type === 'prof') {
+      console.log("update-------");
+      this.profService.updateProf(this.prof).subscribe((response) => {
+        this.prof = response;
+        this.afficherDialog = false;
+        console.log("update prof ok");
+      }, error => {
+        console.log(error);
+      })
     }
-
-
   }
 }

@@ -30,4 +30,8 @@ export class ProfService {
   getProfByid(id: string) {
     return this.http.get<Prof>(`${this.url}/profs/${id}`);
   }
+
+  updateProf(prof): Observable<Prof> {
+    return this.http.put<Prof>(`${this.url}/profs`, prof);
+  }
 }
