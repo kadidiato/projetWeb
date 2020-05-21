@@ -22,24 +22,26 @@
               <label for="type">Type</label>
             </div>
 
-            <div class="md-form">
-              <input class="form-control" name="email" type="text"
-                     id="email" formControlName="email" mdbInput>
-              <label for="email">Email</label>
-            </div>
+            <div style="display: none">
+              <div class="md-form">
+                <input class="form-control" formControlName="email" id="email"
+                       mdbInput name="email" type="text">
+                <label for="email">Email</label>
+              </div>
 
-            <div class="md-form pb-3">
-              <input type="password" id="elegantFormPasswordEx" class="form-control" name="password"
-                     formControlName="password" mdbInput>
-              <label class="password" for="elegantFormPasswordEx"> <a routerLink="#"> Mot de passe oublie </a></label>
-            </div>
-            <br>
-            <div class="text-center mb-3">
-              <button mdbBtn  block="true" rounded="true"
-                      class="z-depth-1a waves-light" type="submit"
-                      [disabled]="signInForm.invalid"
-                      >Connexion
-              </button>
+              <div class="md-form pb-3">
+                <input class="form-control" formControlName="password" id="elegantFormPasswordEx" mdbInput
+                       name="password" type="password">
+                <label class="password" for="elegantFormPasswordEx"> <a routerLink="#"> Mot de passe oublie </a></label>
+              </div>
+              <br>
+              <div class="text-center mb-3">
+                <button [disabled]="signInForm.invalid" block="true" class="z-depth-1a waves-light"
+                        mdbBtn rounded="true"
+                        type="submit"
+                >Connexion
+                </button>
+              </div>
             </div>
           </form>
           <span class="text-danger">{{ errorMessage }}</span>

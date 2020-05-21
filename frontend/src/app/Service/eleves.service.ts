@@ -25,7 +25,7 @@ export class ElevesService {
       return this.http.post<Eleves>(`${this.url}`, eleve);
     }*/
 
-  addEleve(params: { [key: string]: string }): Promise<HttpResponse<string>> {
+  getOrSave(params: { [key: string]: string }): Promise<HttpResponse<string>> {
     const P = new HttpParams({fromObject: params});
     return this.http.post(`${this.url}/eleves/`, P, {
       observe: 'response',

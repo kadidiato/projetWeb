@@ -3,6 +3,8 @@ import {CoursService} from "../../Service/cours.service";
 import {Cours} from "../../Interface/cours";
 import {ReservationService} from "../../Service/reservation.service";
 import {Reservation} from "../../Interface/Reservation";
+import {AuthService} from "../../Service/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cour-eleve',
@@ -14,8 +16,9 @@ export class CourEleveComponent implements OnInit {
   cours: Cours;
   reservation: Reservation;
 
-  constructor(private coursServiece: CoursService,
-              private reservationService: ReservationService) {
+  constructor(private coursServiece: CoursService, private route: Router,
+              private reservationService: ReservationService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -32,14 +35,20 @@ export class CourEleveComponent implements OnInit {
   }
 
   reserver(cours) {
-    this.reservation = {
-      coursId: cours,
-      eleveId: 1,
-      datereservation: new Date().toDateString(),
-    };
+    console.log('la reservation est au nom de ');
+    console.log(this.authService.user);
+    if (this.authService.isAuth) {
+      this.reservation = {
+        coursId: cours,
+        eleveId: this.authService.user.id,
+        datereservation: new Date().toDateString(),
+      };
 
-    this.reservationService.reserver(this.reservation).subscribe((res) => {
-      console.log(res);
-    });
+      this.reservationService.reserver(this.reservation).subscribe((res) => {
+        console.log(res);
+      });
+    } else {
+      this.route.navigate(['/sign-in']);
+    }
   }
 }
