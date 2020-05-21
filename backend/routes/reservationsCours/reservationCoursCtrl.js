@@ -1,4 +1,5 @@
 var models = require('../../models');
+const reservationDao = require('../../Dao/reservationDao');
 
 /**
  * Controller pour recuperer tous les cours
@@ -36,6 +37,7 @@ function getById(req, res, next) {
         return res.json(err);
     });
 }
+
 /**
  * Controller pour recuperer les  cours reservent  par  un eleve grace a son id
  * @param req
@@ -72,34 +74,23 @@ function getReservationByEleveId(req, res, next) {
     });
 
 }
-const sequelize= require('sequelize');
-async function getCoursByEleve(id) {
-    // let eleve = req.params.eleveId;
-   
-    return models.sequelize.query("select * from reservations as r   natural  join  cours  where  r.eleveId= ?",
-        {
-            replacements: [id],
-            type: sequelize.QueryTypes.SELECT
-        }
-    )
 
-}
-function getcourOFEleveOnReservation(req, res, next) {
+async function getcourOfEleve(req, res) {
     let id = req.params.eleveId;
-    let cours = getCoursByEleve(id);
+    let cours = await reservationDao.getCoursByEleve(id);
     if (!cours) {
         return res.status(404).json({
             message: 'aucun cours reservé trouvé'
         });
     }
-    console.log(cours)
+    if (cours.status === 'error') {
+        return res.status(500).json(cours);
+    }
+    console.log(cours);
 
     return res.status(200).json(cours);
 
 }
-
-
-
 
 
 /**
@@ -145,7 +136,7 @@ function destroy(req, res, next) {
     let reservation_id = req.params.id;
 
     models.Reservation.destroy({
-        where: { id: reservation_id }
+        where: {id: reservation_id}
     }).then((destroyedReservation) => {
         return res.status(200).json(destroyedReservation);
     }).catch((err) => {
@@ -169,7 +160,7 @@ function update(req, res, next) {
     };
 
     models.Reservation.update(reservation, {
-        where: { id: id }
+        where: {id: id}
     }).then((updatedReservation) => {
         return res.status(200).json(updatedReservation);
     }).catch((err) => {
@@ -178,5 +169,5 @@ function update(req, res, next) {
 }
 
 module.exports = {
-    getAll, getById, save, destroy, update, getReservationByEleveId, getCoursByEleve,getcourOFEleveOnReservation
+    getAll, getById, save, destroy, update, getcourOfEleve
 };

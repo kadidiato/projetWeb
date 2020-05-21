@@ -8,7 +8,7 @@ const profsRouter = require('./profs/profsRouter');
 const disponibilitesRouter = require('./disponibilite/disponibilitesRouter');
 const profCourRouter = require('./cours/profCoursRouter');
 const profdisponibilitesRouter = require('./disponibilite/profdisponibilitesRouter');
-const elevereservationCoursRouter = require('./reservationsCours/elevereservationCoursRouter ');
+const elevereservationCoursRouter = require('./reservationsCours/elevereservationCoursRouter');
 
 exports.router = (function () {
     var apiRouter = express.Router();
