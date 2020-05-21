@@ -1,3 +1,6 @@
+var models = require('../../models');
+const reservationDao = require('../../Dao/reservationDao');
+
 function destroyByCoursId(req, res) {
     let id_cours = req.params.id_cours;
     let id_eleve = req.params.id_eleve;
@@ -23,9 +26,6 @@ function destroyByCoursId(req, res) {
         });
     });
 }
-
-var models = require('../../models');
-const reservationDao = require('../../Dao/reservationDao');
 
 /**
  * Controller pour recuperer tous les cours
@@ -125,11 +125,6 @@ async function getcourOfEleve(req, res) {
  * @param res
  * @param next
  */
-
-
-
-
-
 function save(req, res, next) {
     //recuperation des infos du cours à creer
     let reservation = {
@@ -138,18 +133,36 @@ function save(req, res, next) {
         coursId: req.body.coursId
     };
 
-    //insertion dans la base de données
-    models.Reservation.create(reservation).then((newReservation) => {
-        if (!newReservation) {
-            return res.status(500).json({
-                message: 'Une erreur est survenue lors de la création reservation'
-            });
-        }
+    console.log("reservation à sauver");
+    console.log(reservation);
 
-        return res.status(201).json(newReservation);
-    }).catch((err) => {
-        return res.status(500).json(err);
-    })
+    models.Reservation.findOne({
+        where: {
+            coursId: reservation.coursId,
+            eleveId: reservation.eleveId,
+        }
+    }).then((resa) => {
+        console.log("la resa trouvée");
+        console.log(resa);
+        if (resa) {
+            return res.status(401).json({
+                message: "Une réservation existe deja pour le cours "
+                    + reservation.coursId + " pour l'eleve " + reservation.eleveId
+            })
+        }
+        //insertion dans la base de données
+        models.Reservation.create(reservation).then((newReservation) => {
+            if (!newReservation) {
+                return res.status(500).json({
+                    message: 'Une erreur est survenue lors de la création reservation'
+                });
+            }
+
+            return res.status(201).json(newReservation);
+        }).catch((err) => {
+            return res.status(500).json(err);
+        })
+    });
 }
 
 /**
