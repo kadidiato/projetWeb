@@ -18,7 +18,7 @@
           <div>
             <div class="table-responsive">
               <p-table [paginator]="true" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
-                       [value]="reservedCours">
+                       [loading]="!reservedCours" [value]="reservedCours">
                 <ng-template pTemplate="header">
                   <tr>
                     <th>Matiere</th>
@@ -35,7 +35,7 @@
                       <td>{{cours.heureCour | date: 'dd/MM/yyyy'}}</td>
                       <td>{{cours.dateCour | date: 'dd/MM/yyyy'}}</td>
                       <td>
-                        <button (click)="confirmCancel()" class="btn btn-danger btn-sm" type="button">
+                        <button (click)="confirmCancel(cours.id)" class="btn btn-danger btn-sm" type="button">
                           <i class="fa fa-trash"></i>
                           Annuler
                         </button>

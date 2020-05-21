@@ -41,4 +41,8 @@ export class ElevesService {
   getReservedCourses(id) {
     return this.http.get(`${this.url}/eleveReservationsCours/${id}`)
   }
+
+  cancelResaByCour(idEleve, idCours) {
+    return this.http.delete(`${this.url}/reservationsCours/${idEleve}/annuler/${idCours}`);
+  }
 }
