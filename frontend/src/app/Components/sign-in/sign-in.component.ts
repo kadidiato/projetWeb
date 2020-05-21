@@ -48,7 +48,7 @@ export class SignInComponent implements OnInit {
     if (this.type) {
       this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
         u => {
-          this.route.navigate(['/profil']);
+          this.route.navigate(['/']);
           this.sendToServeur(this.type);
           /*this.message.add({
             severity: 'success',

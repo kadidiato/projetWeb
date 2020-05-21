@@ -20,7 +20,7 @@ exports.router = (function () {
     apiRouter.use('/disponibilites', disponibilitesRouter);
     apiRouter.use('/profCours', profCourRouter);
     apiRouter.use('/profdisponibilite', profdisponibilitesRouter);
-    apiRouter.use('/elevereservationsCours', elevereservationCoursRouter);
+    apiRouter.use('/eleveReservationsCours', elevereservationCoursRouter);
 
     return apiRouter;
 })();
