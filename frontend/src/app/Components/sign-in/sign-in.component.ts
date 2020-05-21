@@ -28,15 +28,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.afAuth.auth.onAuthStateChanged(
-      (user) => {
-        if (user) {
-          this.authService.isAuth = true;
-        } else {
-          this.authService.isAuth = false;
-        }
-      }
-    );
+    this.authService.checkAndSetAuthState();
   }
 
   /**
@@ -135,6 +127,7 @@ export class SignInComponent implements OnInit {
           this.authService.user = data;
         });
 
+        this.authService.checkAndSetAuthState();
         this.route.navigate(['/profil']);
       } else {
         this.authService.disconnect();

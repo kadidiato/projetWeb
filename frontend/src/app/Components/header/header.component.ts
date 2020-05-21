@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.checkAuthState();
+    this.authService.checkAndSetAuthState();
   }
 
 

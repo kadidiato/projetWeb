@@ -20,10 +20,10 @@ export class AuthService {
   public type: string;
 
   constructor(private http: HttpClient, private afAuth: AngularFireAuth,) {
-    this.checkAuthState();
+    this.checkAndSetAuthState();
   }
 
-  checkAuthState() {
+  checkAndSetAuthState() {
     this.afAuth.auth.onAuthStateChanged(
       (user) => {
         if (user) {
