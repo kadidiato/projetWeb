@@ -69,14 +69,24 @@ function save(req, res, next) {
     models.Eleve.findOne({
         where: {uid: eleve.uid}
     }).then((eleveFound) => {
-        if (eleveFound) {
-            return res.status(400).json({
-                status: 'error',
-                message: `Un eleve existe déjà avec ce id`
+        if (!eleveFound) {
+            models.Prof.create(eleve).then((newProf) => {
+                if (!newProf) {
+                    return res.status(500).json({
+                        message: 'Une erreur est survenue lors de la création du prof'
+                    });
+                }
+                return res.status(201).json(newProf);
+            }).catch((err) => {
+                return res.status(500).json({
+                    status: 'error',
+                    message: 'Une erreur interne est survenue lors de la recuperation du prof ',
+                    details: err.errors
+                });
+            })
 
-            });
         } else {
-            return res.status(200).json(eleveFound)
+            return res.status(200).json(eleveFound);
         }
 
     }).catch((err) => {

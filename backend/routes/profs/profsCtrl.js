@@ -28,10 +28,17 @@ function getAll(req, res, next) {
  * @param next
  */
 function getById(req, res, next) {
-    let id = req.params.id;
-
-    models.Prof.findByPk(id).then((ProfesseurFound) => {
-        return res.json(ProfesseurFound)
+    let uid = req.params.id;
+    models.Prof.findOne({
+        where: {uid: uid}
+    }).then((ProfesseurFound) => {
+        if (!ProfesseurFound) {
+            return res.status(404).json({
+                status: 'error',
+                message: `Prof non trouvé`
+            });
+        }
+        return res.status(201).json(ProfesseurFound);
     }).catch((err) => {
         return res.json(err);
     });

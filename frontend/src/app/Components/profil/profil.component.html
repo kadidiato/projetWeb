@@ -47,18 +47,18 @@
         </ng-template>
       </div>
     </div>
-    <div [class.col-12]="type === 'prof'" [class.col-4]="type === 'eleve'">
+    <div [class.col-12]="type === 'prof'" [class.col-4]="type === 'eleve'" *ngIf="type === 'prof' || 'eleve'">
       <div class="border-primary ">
         <div class="card-header">
           <h3 class="card-title">
-            Informations sur votre compte
+            Vos informations
           </h3>
         </div>
-        <div class="card-body border" *ngIf="eleve">
+        <div class="card-body border" *ngIf="eleve || prof">
           <p>
             <img height="150" width="150" src="{{userPhoto?.photo}}" alt="profile">
           </p>
-          <h4>{{eleve?.nomEleve}} {{eleve?.prenomEleve}}</h4>
+          <h4>{{eleve?.nomEleve || prof?.nomProf}} {{eleve?.prenomEleve || prof?.prenomProf}}</h4>
           <p>
             <button (click)="afficherDialogProfil()" [class.btn-float]="type === 'prof'" class="btn btn-success"
                     type="button">
@@ -66,26 +66,26 @@
               Modifier Vos informations
             </button>
           </p>
-            <p>
-              <b>Nom :</b>
-              <br>
-              {{eleve?.nomEleve}}
-            </p>
-            <p>
-              <b>Prenom :</b>
-              <br>
-              {{eleve?.prenomEleve}}
-            </p>
-            <p>
-              <b>Email :</b>
-              <br>
-              {{eleve?.mailEleve}}
-            </p>
-          </div>
+          <p>
+            <b>Nom :</b>
+            <br>
+            {{eleve?.nomEleve || prof?.nomProf}}
+          </p>
+          <p>
+            <b>Prenom :</b>
+            <br>
+            {{eleve?.prenomEleve || prof?.prenomProf}}
+          </p>
+          <p>
+            <b>Email :</b>
+            <br>
+            {{eleve?.mailEleve || prof?.mailProf}}
+          </p>
         </div>
       </div>
-
     </div>
+
   </div>
-<app-profil-dialog *ngIf="eleve" [afficherDialog]="afficherDialog" [eleve]="eleve"
+</div>
+<app-profil-dialog *ngIf="eleve || prof" [afficherDialog]="afficherDialog" [eleve]="eleve" [prof]="prof"
                    (onDialogHide)="onHideProfilDialog()"></app-profil-dialog>

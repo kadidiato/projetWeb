@@ -10,7 +10,7 @@ describe('ListCoursComponent', () => {
     TestBed.configureTestingModule({
       declarations: [HistoriqueCoursComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

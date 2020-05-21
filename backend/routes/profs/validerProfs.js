@@ -30,7 +30,6 @@ const getById = () => {
     return [
         check('id', 'invalid parameter id')
             .exists().withMessage('parameter id not found')
-            .isNumeric().withMessage('parameter id is not numeric')
             .trim().escape(),
     ];
 };
@@ -49,7 +48,7 @@ const validate = (req, res, next) => {
         return next()
     }
     const extractedErrors = [];
-    errors.array().map(err => extractedErrors.push({[err.param]: err.msg}))
+    errors.array().map(err => extractedErrors.push({[err.param]: err.msg}));
 
     return res.status(422).json({
         errors: extractedErrors,
