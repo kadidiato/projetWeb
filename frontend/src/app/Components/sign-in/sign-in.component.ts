@@ -45,24 +45,30 @@ export class SignInComponent implements OnInit {
    */
   loginGoogle() {
     this.type = this.signInForm.get('type').value;
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
-      u => {
-        this.route.navigate(['/profil']);
-        this.sendToServeur(this.type);
-        /*this.message.add({
-          severity: 'success',
-          summary: `Bienvenue ${u.user.displayName}`,
-        });*/
-      },
-      (error) => {
-        this.errorMessage = error;
-        /* this.message.add({
-           severity: 'error',
-           summary: 'Erreur de connexion',
-           detail: 'Une erreur est survenue l\'ors de la connexion !'
-         });*/
-      }
-    );
+    console.log('type');
+    console.log(this.type);
+    if (this.type) {
+      this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
+        u => {
+          this.route.navigate(['/profil']);
+          this.sendToServeur(this.type);
+          /*this.message.add({
+            severity: 'success',
+            summary: `Bienvenue ${u.user.displayName}`,
+          });*/
+        },
+        (error) => {
+          this.errorMessage = error;
+          /* this.message.add({
+             severity: 'error',
+             summary: 'Erreur de connexion',
+             detail: 'Une erreur est survenue l\'ors de la connexion !'
+           });*/
+        }
+      );
+    } else {
+      this.errorMessage = 'selectionnez un type';
+    }
   }
 
   // formGroup pour la connexion avec email et le passwod
@@ -102,8 +108,6 @@ export class SignInComponent implements OnInit {
    * envoie les information du client au serveur il s'atend a recevoir (email qui est obligatoir)
    */
   sendToServeur(type) {
-    console.log('type');
-    console.log(type);
     this.afAuth.user.subscribe(eleve => {
       localStorage.setItem('type', this.type);
       const i = eleve.displayName.indexOf(' '); // couper en 2 displayname pour avoir le prenom et le nom
@@ -120,7 +124,7 @@ export class SignInComponent implements OnInit {
         });
 
         this.route.navigate(['/profil']);
-      } else {
+      } else if (type === 'prof') {
         this.profService.addProf({
           // variable que le serveur s'attend a recevoir
           nomProf: eleve.displayName.substr(0, i),
@@ -133,6 +137,8 @@ export class SignInComponent implements OnInit {
         });
 
         this.route.navigate(['/profil']);
+      } else {
+        this.afAuth.auth.signOut();
       }
     });
   }

@@ -86,5 +86,5 @@
 
     </div>
   </div>
-<app-profil-dialog [afficherDialog]="afficherDialog" [eleve]="eleve"
+<app-profil-dialog *ngIf="eleve" [afficherDialog]="afficherDialog" [eleve]="eleve"
                    (onDialogHide)="onHideProfilDialog()"></app-profil-dialog>
