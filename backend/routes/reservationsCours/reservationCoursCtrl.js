@@ -47,8 +47,8 @@ function save(req, res, next) {
     //recuperation des infos du cours à creer
     let reservation = {
         datereservation: req.body.datereservation,
-        EleveId: req.body.eleveId,
-        CoursId: req.body.CoursId
+        eleveId: req.body.eleveId,
+        coursId: req.body.coursId
     };
 
     //insertion dans la base de données
