@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
   isAuth: boolean;
+  type: string;
 
   constructor(private afAuth: AngularFireAuth, private route: Router) {
   }
@@ -17,8 +18,8 @@ export class HeaderComponent implements OnInit {
     this.afAuth.auth.onAuthStateChanged(
       (user) => {
         if (user) {
+          this.type = localStorage.getItem('type');
           this.isAuth = true;
-
         } else {
           this.isAuth = false;
         }

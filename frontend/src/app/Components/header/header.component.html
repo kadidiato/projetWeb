@@ -10,8 +10,9 @@
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="historique-cours">Parametrage Cours<span
-          class="sr-only"></span></a>
+        <a *ngIf="type === 'prof'" class="nav-link waves-light" mdbWavesEffect routerLink="historique-cours">
+          Parametrage Cours <span class="sr-only"></span>
+        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="disponibilite">Disponibilites</a>
