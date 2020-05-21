@@ -38,5 +38,7 @@ export class ElevesService {
     return this.http.put<Eleves>(`${this.url}/eleves`, eleve);
   }
 
-
+  getReservedCourses(id) {
+    return this.http.get(`${this.url}/eleveReservationsCours/${id}`)
+  }
 }

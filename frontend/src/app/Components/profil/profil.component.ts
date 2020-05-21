@@ -12,6 +12,7 @@ import {Prof} from "../../Interface/Prof";
 })
 export class ProfilComponent implements OnInit {
   eleve: Eleves;
+  reservedCours;
   prof: Prof;
   afficherDialog = false;
   userPhoto: Eleves = { // je stock la photo de profil recuperer dans firebase
@@ -24,22 +25,18 @@ export class ProfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.init();
+    this.initAuth();
   }
 
-  async init() {
+  async initAuth() {
     this.afAuth.user.subscribe(u => {
       if (u) {
         this.type = localStorage.getItem('type');
-        console.log("this.type from localStorage");
-        console.log(this.type);
-        console.log(u.uid);
 
         if (this.type === 'eleve') {
           this.elevesService.getEleveByid(u.uid).subscribe(res => {
             this.eleve = res;
-            console.log("this.eleve");
-            console.log(this.eleve);
+            this.getReservedCourses();
             this.userPhoto.photo = u.photoURL;
           }, r => {
             console.log('errr' + r);
@@ -58,10 +55,8 @@ export class ProfilComponent implements OnInit {
     });
   }
 
-
   afficherDialogProfil() {
     this.afficherDialog = true;
-
   }
 
   onHideProfilDialog(): void {
@@ -73,4 +68,14 @@ export class ProfilComponent implements OnInit {
         return elt.id === id;
       });
     }*/
+
+  getReservedCourses() {
+    console.log('\ngetReservedCourses');
+    console.log(this.eleve);
+    this.elevesService.getReservedCourses(this.eleve.id).subscribe((res) => {
+      console.log("\n\nres");
+      console.log(res);
+      this.reservedCours = res;
+    });
+  }
 }
