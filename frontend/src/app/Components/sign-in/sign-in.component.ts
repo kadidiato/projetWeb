@@ -18,7 +18,6 @@ export class SignInComponent implements OnInit {
   eleve: Eleves;
   signInForm: FormGroup;
   errorMessage: any;
-  isAuth: boolean;
   type: string;
 
   constructor(private afAuth: AngularFireAuth, private authService: AuthService,
@@ -29,15 +28,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.afAuth.auth.onAuthStateChanged(
-      (user) => {
-        if (user) {
-          this.isAuth = true;
-        } else {
-          this.isAuth = false;
-        }
-      }
-    );
+    this.authService.checkAndSetAuthState();
   }
 
   /**
@@ -110,7 +101,7 @@ export class SignInComponent implements OnInit {
       localStorage.setItem('type', this.type);
       const i = eleve.displayName.indexOf(' '); // couper en 2 displayname pour avoir le prenom et le nom
       if (type === 'eleve') {
-        this.elevesService.addEleve({
+        this.elevesService.getOrSave({
           // variable que le serveur s'attend a recevoir
           nomEleve: eleve.displayName.substr(0, i),
           prenomEleve: eleve.displayName.substr(i),
@@ -119,11 +110,12 @@ export class SignInComponent implements OnInit {
           uid: eleve.uid,
         }).then(data => {
           this.type = '';
+          this.authService.user = data;
         });
 
         this.route.navigate(['/profil']);
       } else if (type === 'prof') {
-        this.profService.addProf({
+        this.profService.getOrSave({
           // variable que le serveur s'attend a recevoir
           nomProf: eleve.displayName.substr(0, i),
           prenomProf: eleve.displayName.substr(i),
@@ -132,11 +124,13 @@ export class SignInComponent implements OnInit {
           uid: eleve.uid,
         }).then(data => {
           this.type = '';
+          this.authService.user = data;
         });
 
+        this.authService.checkAndSetAuthState();
         this.route.navigate(['/profil']);
       } else {
-        this.afAuth.auth.signOut();
+        this.authService.disconnect();
       }
     });
   }
