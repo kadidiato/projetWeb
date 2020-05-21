@@ -5,6 +5,7 @@ import {ReservationService} from "../../Service/reservation.service";
 import {Reservation} from "../../Interface/Reservation";
 import {AuthService} from "../../Service/auth.service";
 import {Router} from "@angular/router";
+import {MessageService} from "primeng";
 
 @Component({
   selector: 'app-cour-eleve',
@@ -17,8 +18,8 @@ export class CourEleveComponent implements OnInit {
   reservation: Reservation;
 
   constructor(private coursServiece: CoursService, private route: Router,
-              private reservationService: ReservationService,
-              private authService: AuthService) {
+              private reservationService: ReservationService, private authService: AuthService,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -35,8 +36,6 @@ export class CourEleveComponent implements OnInit {
   }
 
   reserver(cours) {
-    console.log('la reservation est au nom de ');
-    console.log(this.authService.user);
     if (this.authService.isAuth) {
       this.reservation = {
         coursId: cours,
@@ -45,7 +44,19 @@ export class CourEleveComponent implements OnInit {
       };
 
       this.reservationService.reserver(this.reservation).subscribe((res) => {
+        console.log("res de reserver");
         console.log(res);
+      }, error => {
+        console.log("error de reserver");
+        console.log(error);
+        let msg = 'Une erreur est survenue lors de la réservation';
+        if (error.status === 304) {
+          msg = 'Vous avez deja reservé ce cours'
+        }
+        this.messageService.add({
+          severity: 'error', summary: 'Information réservation',
+          detail: msg
+        });
       });
     } else {
       this.route.navigate(['/sign-in']);

@@ -145,7 +145,7 @@ function save(req, res, next) {
         console.log("la resa trouvée");
         console.log(resa);
         if (resa) {
-            return res.status(401).json({
+            return res.status(304).json({
                 message: "Une réservation existe deja pour le cours "
                     + reservation.coursId + " pour l'eleve " + reservation.eleveId
             })
