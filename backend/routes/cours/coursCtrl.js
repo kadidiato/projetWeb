@@ -2,13 +2,13 @@ var models = require('../../models');
 const { validationResult } = require('express-validator');
 
 /**
- * Controller pour recuperer tous les cours
+ * Controller pour recuperer tous les cours non reservés qui sont base
  * @param req
  * @param res
  * @param next
  */
 function getAll(req, res, next) {
-    models.Cours.findAll().then((cours) => {
+    models.Cours.findAll( {where: { status: 0 } }).then((cours) => {
         //si je trouve pas de cours je retourne un status 404 avec un petit message
         if (!cours)
             return res.status(404).json({
