@@ -4,6 +4,7 @@ import {AngularFireAuth} from "@angular/fire/auth";
 import {ElevesService} from "../../Service/eleves.service";
 import {ProfService} from "../../Service/prof.service";
 import {Prof} from "../../Interface/Prof";
+import {ConfirmationService} from "primeng";
 
 @Component({
   selector: 'app-profil',
@@ -21,7 +22,7 @@ export class ProfilComponent implements OnInit {
   type: string;
 
   constructor(private afAuth: AngularFireAuth, private elevesService: ElevesService,
-              private  profService: ProfService) {
+              private  profService: ProfService, private confirmService: ConfirmationService) {
   }
 
   ngOnInit(): void {
@@ -76,6 +77,19 @@ export class ProfilComponent implements OnInit {
       console.log("\n\nres");
       console.log(res);
       this.reservedCours = res;
+    });
+  }
+
+
+  confirmCancel() {
+    this.confirmService.confirm({
+      message: `Etes-vous sûr·e de vouloir supprimer cette reservation ?`,
+      accept: () => {
+        console.log('accepted');
+      },
+      reject: () => {
+        console.log('rejected');
+      }
     });
   }
 }

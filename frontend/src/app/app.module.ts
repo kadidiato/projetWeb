@@ -12,7 +12,7 @@ import {ForgotPasswordComponent} from './Components/forgot-password/forgot-passw
 import {SignUpComponent} from './Components/sign-up/sign-up.component';
 import {HistoriqueCoursComponent} from './Components/historique-cours/historique-cours.component';
 import {DisponibiliteComponent} from './Components/disponibilite/disponibilite.component';
-import {ButtonModule, DialogModule, TableModule} from "primeng";
+import {ButtonModule, ConfirmationService, ConfirmDialogModule, DialogModule, TableModule} from "primeng";
 
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
@@ -32,7 +32,7 @@ import {NgxSelectModule} from "ngx-select-ex";
 import {ProfilComponent} from './Components/profil/profil.component';
 import {ProfilDialogComponent} from './Components/profil/profil-dialog/profil-dialog.component';
 import {CourEleveComponent} from './Components/cour-eleve/cour-eleve.component';
-import {ProfDiaolgComponent} from './Components/profil/prof-diaolg/prof-diaolg.component';
+import {ProfilProfDiaolgComponent} from './Components/profil/profil-prof-diaolg/profil-prof-diaolg.component';
 
 
 @NgModule({
@@ -50,7 +50,7 @@ import {ProfDiaolgComponent} from './Components/profil/prof-diaolg/prof-diaolg.c
     ProfilComponent,
     ProfilDialogComponent,
     CourEleveComponent,
-    ProfDiaolgComponent
+    ProfilProfDiaolgComponent
   ],
   imports: [
     BrowserModule,
@@ -76,9 +76,10 @@ import {ProfDiaolgComponent} from './Components/profil/prof-diaolg/prof-diaolg.c
     DialogModule,
     ButtonModule,
     NgxSelectModule,
+    ConfirmDialogModule,
 
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

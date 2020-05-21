@@ -35,7 +35,7 @@
                       <td>{{cours.heureCour | date: 'dd/MM/yyyy'}}</td>
                       <td>{{cours.dateCour | date: 'dd/MM/yyyy'}}</td>
                       <td>
-                        <button class="btn btn-danger btn-sm" type="button">
+                        <button (click)="confirmCancel()" class="btn btn-danger btn-sm" type="button">
                           <i class="fa fa-trash"></i>
                           Annuler
                         </button>
@@ -98,3 +98,11 @@
 <app-prof-diaolg *ngIf="prof" [afficherDialog]="afficherDialog" [prof]="prof" (onDialogHide)="onHideProfilDialog()">
 
 </app-prof-diaolg>
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button (click)="cd.reject()" icon="pi pi-times" label="Non, arrêtons" pButton type="button"></button>
+    <button (click)="cd.accept()" class="ui-button-danger" icon="pi pi-check" label="Oui, annulons"
+            pButton type="button">
+    </button>
+  </p-footer>
+</p-confirmDialog>
