@@ -9,41 +9,43 @@
         <option *ngFor="let prof of profs" [value]="prof.id">{{prof.id}}</option>
       </select>-->
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="prof || eleve">
       <label for="nomEleve">Nom</label>
-      <input [(ngModel)]="eleve.nomEleve" class="form-control" id="nomEleve" name="nomEleve"
-             placeholder="Entrez le nom de l'eleve" required type="text">
+      <input [(ngModel)]="eleve?.nomEleve || prof.nomProf" class="form-control" id="nomEleve" name="nomEleve"
+             placeholder="Entrez le nom" required type="text">
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="prof || eleve">
       <label for="prenomEleve">Prenom</label>
-      <input [(ngModel)]="eleve.prenomEleve" class="form-control" id="prenomEleve" name="prenomEleve"
-             placeholder="Entrez le nom de l'eleve" required type="text">
+      <input [(ngModel)]="eleve?.prenomEleve || prof.prenomProf" class="form-control" id="prenomEleve"
+             name="prenomEleve"
+             placeholder="Entrez le prenom" required type="text">
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="prof || eleve">
       <label for="mailEleve">Mail</label>
-      <input [(ngModel)]="eleve.mailEleve" class="form-control" id="mailEleve" name="mailEleve"
-             placeholder="Entrez la date du cour" required type="text">
+      <input [(ngModel)]="eleve?.mailEleve || prof.mailProf" class="form-control" id="mailEleve" name="mailEleve"
+             placeholder="Entrez le mail" required type="text">
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="prof || eleve">
       <label for="paysEleve">Pays </label>
-      <input [(ngModel)]="eleve.paysEleve" class="form-control" id="paysEleve" name="niveauEleve"
-             placeholder="Entrez le niveau de l'eleve" required type="text">
+      <input [(ngModel)]="eleve?.paysEleve || prof.paysProf" class="form-control" id="paysEleve" name="niveauEleve"
+             placeholder="Entrez le pays" required type="text">
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="prof || eleve">
       <label for="villeEleve">Ville </label>
-      <input [(ngModel)]="eleve.villeEleve" class="form-control" id="villeEleve" name="niveauEleve"
-             placeholder="Entrez le niveau de l'eleve" required type="text">
+      <input [(ngModel)]="eleve?.villeEleve || prof.villeProf" class="form-control" id="villeEleve" name="niveauEleve"
+             placeholder="Entrez la ville" required type="text">
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="prof || eleve">
       <label for="niveauEleve">Niveau </label>
-      <input [(ngModel)]="eleve.niveauEleve" class="form-control" id="niveauEleve" name="niveauEleve"
-             placeholder="Entrez le niveau de l'eleve" required type="text">
+      <input [(ngModel)]="eleve?.niveauEleve || prof.nbAvisPros" class="form-control" id="niveauEleve"
+             name="niveauEleve"
+             placeholder="Entrez le niveau " required type="text">
     </div>
     <br>
     <p-footer>
       <button type="button" pButton (click)="ajouterEleve()" label="Ajouter"
               class="ui-button-rounded" style="margin-right: 10px"></button>
-      <button type="button" pButton icon="fa fa-close" (click)="afficherDialog" label="Annuler"
+      <button type="button" pButton icon="fa fa-close" (click)="onHide()" label="Annuler"
               class="ui-button-secondary ui-button-rounded" [disabled]="form.invalid"></button>
     </p-footer>
   </form>
