@@ -3,9 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {SignInComponent} from "./Components/sign-in/sign-in.component";
 import {SignUpComponent} from "./Components/sign-up/sign-up.component";
 import {ForgotPasswordComponent} from "./Components/forgot-password/forgot-password.component";
-import {HistoriqueCoursComponent} from "./Components/list-cours/historique-cours.component";
+import {HistoriqueCoursComponent} from "./Components/historique-cours/historique-cours.component";
 import {DisponibiliteComponent} from "./Components/disponibilite/disponibilite.component";
-import {DetailCourComponent} from "./Components/list-cours/detail-cour/detail-cour.component";
+import {DetailCourComponent} from "./Components/historique-cours/detail-cour/detail-cour.component";
 import {ProfilComponent} from "./Components/profil/profil.component";
 import {CourEleveComponent} from "./Components/cour-eleve/cour-eleve.component";
 import {AuthGuard} from "./Service/auth.guard";
@@ -24,7 +24,7 @@ const routes: Routes = [
   // {path: 'ajoutcours', component: AjoutCoursComponent },
   {path: 'disponibilite', component: DisponibiliteComponent, canActivate: [AuthGuard]},
   {path: 'profil', component: ProfilComponent, canActivate: [AuthGuard]},
-  {path: 'cours', component: CourEleveComponent, canActivate: [AuthGuard]},
+  {path: 'cours', component: CourEleveComponent },
 ];
 
 @NgModule({

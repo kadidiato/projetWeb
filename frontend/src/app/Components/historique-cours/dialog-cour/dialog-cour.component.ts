@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Cours} from "../../../Interface/cours";
 import {CoursService} from "../../../Service/cours.service";
 import {ProfService} from "../../../Service/prof.service";
-import {Prof} from "../../../Interface/Prof";
 
 @Component({
   selector: 'app-dialog-cour',

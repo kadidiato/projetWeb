@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CoursService} from "../../Service/cours.service";
 import {Cours} from "../../Interface/cours";
+import {ReservationService} from "../../Service/reservation.service";
+import {Reservation} from "../../Interface/Reservation";
 
 @Component({
   selector: 'app-cour-eleve',
@@ -10,8 +12,10 @@ import {Cours} from "../../Interface/cours";
 export class CourEleveComponent implements OnInit {
 
   cours: Cours;
+  reservation: Reservation;
 
-  constructor(private coursServiece: CoursService) {
+  constructor(private coursServiece: CoursService,
+              private reservationService: ReservationService) {
   }
 
   ngOnInit(): void {
@@ -27,7 +31,15 @@ export class CourEleveComponent implements OnInit {
     });
   }
 
-  reserver() {
+  reserver(cours) {
+    this.reservation = {
+      coursId: cours,
+      eleveId: 1,
+      datereservation: new Date().toDateString(),
+    };
 
+    this.reservationService.reserver(this.reservation).subscribe((res) => {
+      console.log(res);
+    });
   }
 }

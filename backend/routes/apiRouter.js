@@ -8,6 +8,7 @@ const profsRouter = require('./profs/profsRouter');
 const disponibilitesRouter = require('./disponibilite/disponibilitesRouter');
 const profCourRouter = require('./cours/profCoursRouter');
 const profdisponibilitesRouter = require('./disponibilite/profdisponibilitesRouter');
+const elevereservationCoursRouter = require('./reservationsCours/elevereservationCoursRouter ');
 
 exports.router = (function () {
     var apiRouter = express.Router();
@@ -19,6 +20,7 @@ exports.router = (function () {
     apiRouter.use('/disponibilites', disponibilitesRouter);
     apiRouter.use('/profCours', profCourRouter);
     apiRouter.use('/profdisponibilite', profdisponibilitesRouter);
+    apiRouter.use('/elevereservationsCours', elevereservationCoursRouter);
 
     return apiRouter;
 })();

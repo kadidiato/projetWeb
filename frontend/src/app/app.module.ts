@@ -10,7 +10,7 @@ import {SignInComponent} from './Components/sign-in/sign-in.component';
 import {FooterComponent} from './Components/footer/footer.component';
 import {ForgotPasswordComponent} from './Components/forgot-password/forgot-password.component';
 import {SignUpComponent} from './Components/sign-up/sign-up.component';
-import {HistoriqueCoursComponent} from './Components/list-cours/historique-cours.component';
+import {HistoriqueCoursComponent} from './Components/historique-cours/historique-cours.component';
 import {DisponibiliteComponent} from './Components/disponibilite/disponibilite.component';
 import {ButtonModule, DialogModule, TableModule} from "primeng";
 
@@ -25,8 +25,8 @@ import {AngularFireMessagingModule} from '@angular/fire/messaging';
 
 import {MessageService} from 'primeng/api';
 import {HttpClientModule} from "@angular/common/http";
-import {DetailCourComponent} from './Components/list-cours/detail-cour/detail-cour.component';
-import {DialogCourComponent} from './Components/list-cours/dialog-cour/dialog-cour.component';
+import {DetailCourComponent} from './Components/historique-cours/detail-cour/detail-cour.component';
+import {DialogCourComponent} from './Components/historique-cours/dialog-cour/dialog-cour.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxSelectModule} from "ngx-select-ex";
 import {ProfilComponent} from './Components/profil/profil.component';
