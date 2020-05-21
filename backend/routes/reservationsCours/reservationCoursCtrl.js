@@ -1,3 +1,29 @@
+function destroyByCoursId(req, res) {
+    let id_cours = req.params.id_cours;
+    let id_eleve = req.params.id_eleve;
+
+    models.Reservation.findOne({
+        where: {
+            coursId: id_cours,
+            eleveId: id_eleve,
+        }
+    }).then((resa) => {
+        if (!resa) {
+            return res.status(404).json({
+                message: "Aucune réservation pour le cours " + id_cours + " pour l'eleve " + id_eleve
+            })
+        }
+
+        models.Reservation.destroy({
+            where: {id: resa.id}
+        }).then((destroyedReservation) => {
+            return res.status(200).json(destroyedReservation);
+        }).catch((err) => {
+            return res.status(500).json(err);
+        });
+    });
+}
+
 var models = require('../../models');
 const reservationDao = require('../../Dao/reservationDao');
 
@@ -169,5 +195,5 @@ function update(req, res, next) {
 }
 
 module.exports = {
-    getAll, getById, save, destroy, update, getcourOfEleve
+    getAll, getById, save, destroy, update, getcourOfEleve, destroyByCoursId
 };
