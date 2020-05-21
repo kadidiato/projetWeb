@@ -4,8 +4,7 @@ import {AngularFireAuth} from "@angular/fire/auth";
 import {ElevesService} from "../../Service/eleves.service";
 import {ProfService} from "../../Service/prof.service";
 import {Prof} from "../../Interface/Prof";
-import {ConfirmationService} from "primeng";
-import {Router} from "@angular/router";
+import {ConfirmationService, MessageService} from "primeng";
 
 @Component({
   selector: 'app-profil',
@@ -24,7 +23,7 @@ export class ProfilComponent implements OnInit {
 
   constructor(private afAuth: AngularFireAuth, private elevesService: ElevesService,
               private  profService: ProfService, private confirmService: ConfirmationService,
-              private router: Router) {
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -84,10 +83,15 @@ export class ProfilComponent implements OnInit {
       message: `Etes-vous sûr·e de vouloir supprimer cette reservation ?`,
       accept: () => {
         this.elevesService.cancelResaByCour(this.eleve.id, idCours).subscribe((res) => {
+          console.log(res);
           if (res === 1) {
             this.getReservedCourses();
           } else {
             // informer que c'est pas faisable
+            this.messageService.add({
+              severity: 'error', summary: 'Annulation réservation',
+              detail: 'Une erreur est survenue lors de l\'annulation de la réservation'
+            });
           }
         });
       },
