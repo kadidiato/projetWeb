@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams, HttpResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +14,14 @@ export class ProfService {
 
   getAllProf(): Observable<any> {
     return this.http.get(`${this.url}/profs`);
+  }
+
+  addProf(params: { [key: string]: string }): Promise<HttpResponse<string>> {
+    const P = new HttpParams({fromObject: params});
+    return this.http.post(`${this.url}/profs`, P, {
+      observe: 'response',
+      responseType: 'text',
+      headers: {'content-type': 'application/x-www-form-urlencoded'}
+    }).toPromise();
   }
 }

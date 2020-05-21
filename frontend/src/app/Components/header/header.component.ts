@@ -30,8 +30,7 @@ export class HeaderComponent implements OnInit {
   onSignOut() {
     this.afAuth.auth.signOut();
     this.route.navigate(['/sign-in']);
-    //this.init();
-
+    localStorage.removeItem('type');
   }
 
 }

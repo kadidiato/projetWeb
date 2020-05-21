@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Eleves} from "../../Interface/eleve";
-import {Prof} from "../../Interface/Prof";
 import {AngularFireAuth} from "@angular/fire/auth";
 import {ElevesService} from "../../Service/eleves.service";
 
@@ -15,6 +14,7 @@ export class ProfilComponent implements OnInit {
   userPhoto: Eleves = { // je stock la photo de profil recuperer dans firebase
     photo: '',
   };
+  type: string;
 
   constructor(private afAuth: AngularFireAuth, private elevesService: ElevesService) {
   }
@@ -24,17 +24,33 @@ export class ProfilComponent implements OnInit {
   }
 
   async init() {
-    await this.afAuth.user.subscribe(u => {
+    this.afAuth.user.subscribe(u => {
       if (u) {
+        this.type = localStorage.getItem('type');
+        console.log("this.type from localStorage");
+        console.log(this.type);
         console.log(u.uid);
-        this.elevesService.getEleveByid(u.uid).subscribe(res => {
-          this.eleve = res;
-          console.log("this.eleve");
-          console.log(this.eleve);
-          this.userPhoto.photo = u.photoURL;
-        }, r => {
-          console.log('errr' + r);
-        });
+
+        if (this.type === 'eleve') {
+          this.elevesService.getEleveByid(u.uid).subscribe(res => {
+            this.eleve = res;
+            console.log("this.eleve");
+            console.log(this.eleve);
+            this.userPhoto.photo = u.photoURL;
+          }, r => {
+            console.log('errr' + r);
+          });
+        } else {
+          // get du prof
+          this.elevesService.getEleveByid(u.uid).subscribe(res => {
+            this.eleve = res;
+            console.log("this.eleve");
+            console.log(this.eleve);
+            this.userPhoto.photo = u.photoURL;
+          }, r => {
+            console.log('errr' + r);
+          });
+        }
       }
     });
   }

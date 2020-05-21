@@ -43,6 +43,51 @@ function getById(req, res, next) {
  * @param res
  * @param next
  */
+
+function getOrCreate(req, res, next) {
+
+    let prof = {
+        nomProf: req.body.nomProf,
+        prenomProf: req.body.prenomProf,
+        mailProf: req.body.mailProf,
+        matiereProf: req.body.matiereProf,
+        // a enlever cette parti pour faire la table nottation
+        nbAvisPos: req.body.nbAvisPos,
+        nbAvisNeg: req.body.nbAvisNeg,
+        //
+        niveauEProf: req.body.niveauEProf,
+        rueProf: req.body.rueProf,
+        villeProf: req.body.villeProf,
+        zipProf: req.body.zipProf,
+        paysProf: req.body.paysProf,
+        uid: req.body.uid,
+    };
+
+    models.Prof.findOne({
+        where: {uid: prof.uid}
+    }).then((profFound) => {
+        if (!profFound) {
+            models.Prof.create(prof).then((newProf) => {
+                if (!newProf) {
+                    return res.status(500).json({
+                        message: 'Une erreur est survenue lors de la création du prof'
+                    });
+                }
+                return res.status(201).json(newProf);
+            }).catch((err) => {
+                return res.status(500).json({
+                    status: 'error',
+                    message: 'Une erreur interne est survenue lors de la recuperation du prof ',
+                    details: err.errors
+                });
+            })
+
+        } else {
+            return res.status(200).json(profFound);
+        }
+    })
+}
+
 function save(req, res, next) {
     //recuperation des infos du cours à creer
     let prof = {
@@ -59,7 +104,7 @@ function save(req, res, next) {
         villeProf: req.body.villeProf,
         zipProf: req.body.zipProf,
         paysProf: req.body.paysProf,
-
+        uid: req.body.uid,
     };
 
     //insertion dans la base de données
@@ -129,5 +174,5 @@ function update(req, res, next) {
 }
 
 module.exports = {
-    getAll, getById, save, destroy, update,
+    getAll, getById, save, destroy, update, getOrCreate
 };

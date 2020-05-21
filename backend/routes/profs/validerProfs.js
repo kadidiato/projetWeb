@@ -68,33 +68,21 @@ function save() {
             .exists().withMessage('parametre mail introuvable').trim().escape(),
         body('mailProf', 'matiereProf saisi est invalide')
             .exists().withMessage('parametre heureCour introuvable').trim().escape(),
+        body('uid', 'uid introuvable')
+            .exists().withMessage('parametre uid introuvable').trim().escape(),
 
-        body('matiereProf', 'matiereProf saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
-
-        body('nbAvisPos', 'invalid parameter id')
-            .exists().withMessage('parametre eleveId introuvable')
+        body('matiereProf', 'matiereProf saisi est invalide').optional().trim().escape(),
+        body('nbAvisPos', 'invalid parameter id').optional()
             .isNumeric().withMessage('parametre eleveId doit être numérique')
             .trim().escape(),
-        body('nbAvisNeg', 'invalid parameter id')
-            .exists().withMessage('parametre coursId introuvable')
+        body('nbAvisNeg', 'invalid parameter id').optional()
             .isNumeric().withMessage('parametre coursId doit être numérique')
             .trim().escape(),
-
-        body('niveauProf', 'niveauProf saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
-
-        body('rueProf', 'rueProf saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
-
-        body('villeProf', 'ville saisi est invalide')
-            .exists().withMessage('parametre heureCour introuvable').trim().escape(),
-
-        body('zipProf', 'invalid parameter id').trim().escape(),
-
-
-        body('paysProf', 'Pays saisi est invalide')
-            .exists().withMessage('parametre Pays introuvable').trim().escape(),
+        body('niveauProf', 'niveauProf saisi est invalide').optional().trim().escape(),
+        body('rueProf', 'rueProf saisi est invalide').optional().trim().escape(),
+        body('villeProf', 'ville saisi est invalide').optional().trim().escape(),
+        body('zipProf', 'invalid parameter id').optional().trim().escape(),
+        body('paysProf', 'Pays saisi est invalide').optional().trim().escape(),
     ]
 }
 

@@ -75,18 +75,10 @@ function save(req, res, next) {
                 message: `Un eleve existe déjà avec ce id`
 
             });
+        } else {
+            return res.status(200).json(eleveFound)
         }
-        models.Eleve.create(eleve).then((newEleve) => {
-            if (!newEleve) {
-                return res.status(500).json({
-                    message: 'Une erreur est survenue lors de la création du cours'
-                });
-            }
 
-            return res.status(201).json(newEleve);
-        }).catch((err) => {
-            return res.status(500).json(err);
-        });
     }).catch((err) => {
         console.error(err);
         return res.status(500).json({
