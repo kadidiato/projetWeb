@@ -33,6 +33,7 @@ import {ProfilComponent} from './Components/profil/profil.component';
 import {ProfilDialogComponent} from './Components/profil/profil-dialog/profil-dialog.component';
 import {CourEleveComponent} from './Components/cour-eleve/cour-eleve.component';
 import {ProfilProfDiaolgComponent} from './Components/profil/profil-prof-diaolg/profil-prof-diaolg.component';
+import {AddDispoDialogComponent} from './Components/disponibilite/add-dispo-dialog/add-dispo-dialog.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {ProfilProfDiaolgComponent} from './Components/profil/profil-prof-diaolg/
     ProfilComponent,
     ProfilDialogComponent,
     CourEleveComponent,
-    ProfilProfDiaolgComponent
+    ProfilProfDiaolgComponent,
+    AddDispoDialogComponent
   ],
   imports: [
     BrowserModule,
