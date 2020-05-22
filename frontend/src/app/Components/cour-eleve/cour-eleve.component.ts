@@ -18,7 +18,7 @@ export class CourEleveComponent implements OnInit {
   reservation: Reservation;
 
   constructor(private coursServiece: CoursService, private route: Router,
-              private reservationService: ReservationService, private authService: AuthService,
+              private reservationService: ReservationService, public authService: AuthService,
               private messageService: MessageService) {
   }
 

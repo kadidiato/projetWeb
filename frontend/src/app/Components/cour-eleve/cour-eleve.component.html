@@ -36,7 +36,8 @@
               <td>{{c.updatedAt | date: 'dd/MM/yyyy'}}</td>
               <td>
                 <div class="btn-group text-center">
-                  <button (click)="reserver(c.id)" class="btn btn-outline-success" type="button">Reserver
+                  <button (click)="reserver(c.id)" [disabled]="authService.type === 'prof'"
+                          class="btn btn-outline-success" type="button">Reserver
                   </button>
                 </div>
 
