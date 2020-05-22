@@ -3,6 +3,7 @@ import {Disponibilite} from 'src/app/Interface/disponibilite';
 import {DisponibiliteService} from 'src/app/Service/disponibilite.service';
 import {Router} from "@angular/router";
 import {AuthService} from "../../Service/auth.service";
+import {ConfirmationService, MessageService} from "primeng";
 
 @Component({
   selector: 'app-disponibilite',
@@ -17,7 +18,8 @@ export class DisponibiliteComponent implements OnInit {
   modif: boolean;
 
   constructor(private disponibiliteServiece: DisponibiliteService, private route: Router,
-              public authService: AuthService) {
+              public authService: AuthService, private confirmService: ConfirmationService,
+              private msgService: MessageService) {
   }
 /**
    * appel de la fonction init();
@@ -53,6 +55,31 @@ export class DisponibiliteComponent implements OnInit {
     this.dispanip = d;
     this.modif = true;
     this.afficherDialog = true;
+  }
+
+  confirmDelete(id) {
+    this.confirmService.confirm({
+      message: `Etes-vous sûr·e de vouloir supprimer cette disponibilité ?`,
+      accept: () => {
+        this.disponibiliteServiece.deleteDispo(id).subscribe((res) => {
+          this.init();
+          this.msgService.add({
+            severity: 'success', summary: 'Suppression disponibilité',
+            detail: 'La disponibilité est maintenant a été supprimée'
+          });
+        }, error => {
+          console.log('erreur');
+          console.log(error);
+          this.msgService.add({
+            severity: 'error', summary: 'Suppression disponibilité',
+            detail: 'Une erreur est survenue lors de la suppression de la disponibilité'
+          });
+        })
+      },
+      reject: () => {
+        console.log('rejected');
+      }
+    });
   }
 
   onAddDispoDialogHide(): void {
