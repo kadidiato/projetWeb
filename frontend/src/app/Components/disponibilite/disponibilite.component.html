@@ -12,13 +12,14 @@
         <div class="col-lg-12">
           <div class="panel panel-heading">
           </div>
-          <p-table [value]="disponibilites" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [paginator]="true">
+          <p-table [paginator]="true" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
+                   [value]="disponibilites">
             <ng-template pTemplate="header">
               <tr class="text-center ">
                 <th>Disponibilite #</th>
                 <th>Description</th>
                 <th>Professeur</th>
-                <th>Date </th>
+                <th>Date</th>
                 <th>Heure de debut</th>
                 <th>Heure de Fin</th>
                 <th>Créer le</th>
@@ -32,17 +33,24 @@
                 <td>{{c.description}}</td>
                 <td>{{c.profId}}</td>
                 <td>{{c.dateDispo | date: 'dd/MM/yyyy'}}</td>
-                <td>{{c.heureDispoDebu | date: 'dd/MM/yyyy'}}</td>  
+                <td>{{c.heureDispoDebu | date: 'dd/MM/yyyy'}}</td>
                 <td>{{c.heureDispoFin | date: 'dd/MM/yyyy'}}</td>
                 <td>{{c.createdAt | date: 'dd/MM/yyyy'}}</td>
                 <td>{{c.updatedAt | date: 'dd/MM/yyyy'}}</td>
                 <td>
                   <div class="btn-group" class="text-center ">
-  
+
                     <button (click)="reserver()" type="button" class="btn btn-outline-success">Reserver
                     </button>
                   </div>
-  
+
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td [attr.colspan]="9" class="text-center">
+                  Aucune disponibilité trouvée
                 </td>
               </tr>
             </ng-template>

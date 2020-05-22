@@ -112,7 +112,6 @@ async function getcourOfEleve(req, res) {
     if (cours.status === 'error') {
         return res.status(500).json(cours);
     }
-    console.log(cours);
 
     return res.status(200).json(cours);
 
@@ -132,9 +131,6 @@ function save(req, res, next) {
         eleveId: req.body.eleveId,
         coursId: req.body.coursId
     };
-
-    console.log("reservation à sauver");
-    console.log(reservation);
 
     models.Reservation.findOne({
         where: {

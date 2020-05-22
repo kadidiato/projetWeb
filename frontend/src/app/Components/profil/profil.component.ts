@@ -86,6 +86,10 @@ export class ProfilComponent implements OnInit {
           console.log(res);
           if (res === 1) {
             this.getReservedCourses();
+            this.messageService.add({
+              severity: 'success', summary: 'Annulation réservation',
+              detail: 'La réservation est maintenant a été annulée'
+            });
           } else {
             // informer que c'est pas faisable
             this.messageService.add({
