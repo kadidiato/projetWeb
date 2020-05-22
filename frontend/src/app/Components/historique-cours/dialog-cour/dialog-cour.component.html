@@ -1,11 +1,11 @@
 <p-dialog (onHide)="onHide()" [(visible)]="afficherDialog" [baseZIndex]="10000" [maximizable]="true"
-          [minY]="90" [modal]="true"
-          [responsive]="true" [style]="{width: '400px', minWidth: '250px'}" header="Profile">
+          [minY]="90" [modal]="true" header="{{titreDialog}}"
+          [responsive]="true" [style]="{width: '400px', minWidth: '250px'}" (onShow)="onShow()">
   <form #form="ngForm">
     <div class="form-group">
       <label for="profId">Professeur</label>
       <select [(ngModel)]="cour.profId" id="profId" name="profId">
-        <option *ngFor="let prof of profs" [value]="prof.id">{{prof.id}}</option>
+        <option *ngFor="let prof of profs" [value]="prof.id">{{prof.text}}</option>
       </select>
       <!--<ngx-select  [(ngModel)]="cour.profId" [items]="profs" id="profId"
       name="profId" noResultsFound="Aucun client trouvé"
@@ -32,13 +32,17 @@
       <input [(ngModel)]="cour.dateCour" class="form-control" id="heureCour" name="heureCour"
              placeholder="Entrez la date du cour" required type="datetime-local">
     </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select [(ngModel)]="cour.profId" id="status" name="status">
+        <option *ngFor="let status of status" [value]="status.valueOf()">{{status}}</option>
+      </select>
+    </div>
     <br>
     <p-footer>
-      <button (click)="ajouterCour()" class="ui-button-rounded" label="Ajouter" pButton
+      <button (click)="valider()" class="ui-button-rounded" label="Ajouter" pButton [disabled]="form.invalid"
               style="margin-right: 10px" type="button"></button>
-      <button (click)="afficherDialog=false" [disabled]="form.invalid" class="ui-button-secondary ui-button-rounded"
-              icon="fa fa-close" label="Annuler"
-              pButton type="button"></button>
     </p-footer>
   </form>
 </p-dialog>

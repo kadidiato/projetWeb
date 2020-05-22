@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
         dateCour: DataTypes.DATE,
         heureCour: DataTypes.DATE,
         matiere: DataTypes.STRING,
-        description: DataTypes.STRING
+        description: DataTypes.STRING,
+        prix_cours_heure: DataTypes.STRING
     }, {});
     Cours.associate = function (models) {
         // associations can be defined here

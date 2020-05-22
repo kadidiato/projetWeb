@@ -79,7 +79,6 @@ function save(req, res, next) {
         heureCour: req.body.heureCour || null,
         matiere: req.body.matiere,
         description: req.body.description,
-        description: req.body.description,
         prix_cours_heure: req.body.prix_cours_heure,
         status: req.body.status
 
