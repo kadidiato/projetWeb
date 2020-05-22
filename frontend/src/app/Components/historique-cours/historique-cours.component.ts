@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CoursService} from "../../Service/cours.service";
+import {Cours} from "../../Interface/cours";
 
 @Component({
   selector: 'app-list-cours',
@@ -8,8 +9,10 @@ import {CoursService} from "../../Service/cours.service";
 })
 export class HistoriqueCoursComponent implements OnInit {
 
-  cours: any[];
-  afficherDialog = false; // boolean pour ouvrir et fermer le dialogue pop up
+  cours: Cours;
+  afficherDialog = false;
+
+  courSelectionne: Cours;
 
   constructor(private coursServiece: CoursService) {
   }
@@ -27,7 +30,8 @@ export class HistoriqueCoursComponent implements OnInit {
     });
   }
 
-  afficherDialogCour(): void {
+  ajoutNewCour(): void {
+    this.courSelectionne = new Cours();
     this.afficherDialog = true;
   }
 
@@ -36,5 +40,11 @@ export class HistoriqueCoursComponent implements OnInit {
    */
   onHideProfilDialog(): void {
     this.afficherDialog = false;
+  }
+
+
+  modificationCour(cour: Cours) {
+    this.courSelectionne = cour;
+    this.afficherDialog = true;
   }
 }

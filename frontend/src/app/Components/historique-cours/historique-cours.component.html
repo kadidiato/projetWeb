@@ -14,7 +14,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div id="butt">
-                <button (click)="afficherDialogCour()" class="btn btn-outline-success" type="button">Ajouter un cour
+                <button (click)="ajoutNewCour()" class="btn btn-outline-success" type="button">Ajouter un cour
                 </button>
               </div>
             </div>
@@ -44,11 +44,11 @@
               <td>{{c.updatedAt | date: 'dd/MM/yyyy'}}</td>
               <td>
                 <div class="btn-group" class="text-center ">
-                  <button [routerLink]="['/listCours/details', c.id]"
+                  <button [routerLink]="['/historique-cours/details', c.id]"
                           class="btn btn-info"><i class="far fa-eye"></i>
                   </button>
-                  <button
-                    class="btn btn-primary"><i class="fas fa-edit"></i>
+                  <button (click)="modificationCour(c)"
+                          class="btn btn-primary"><i class="fas fa-edit"></i>
                   </button>
                   <button
                     class="btn btn-danger"><i class="far fa-trash-alt"></i>
@@ -64,6 +64,7 @@
   </div>
 </div>
 
-<app-dialog-cour (onDialogHide)="onHideProfilDialog()" [afficherDialog]="afficherDialog">
+<app-dialog-cour *ngIf="afficherDialog" (onDialogHide)="onHideProfilDialog()" [afficherDialog]="afficherDialog"
+                 [cour]="courSelectionne">
 
 </app-dialog-cour>

@@ -3,6 +3,7 @@ import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable, throwError} from "rxjs";
 import {Cours} from "../Interface/cours";
 import {catchError} from "rxjs/operators";
+import {Eleves} from "../Interface/eleve";
 
 
 @Injectable({
@@ -40,6 +41,10 @@ export class CoursService {
   addCours(cour: Cours): Observable<Cours> {
     return this.http.post<Cours>(`${this.api_redirect}/cours`, cour)
       .pipe(catchError<any, any>(this.handleError));
+  }
+
+  updateCour(cour): Observable<Cours> {
+    return this.http.put<Cours>(`${this.api_redirect}/cours`, cour);
   }
 
   /**

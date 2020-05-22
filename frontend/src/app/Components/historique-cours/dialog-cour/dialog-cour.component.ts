@@ -11,35 +11,22 @@ import {ProfService} from "../../../Service/prof.service";
 export class DialogCourComponent implements OnInit {
 
   profs: [{ id: number, text: string }];
-  cours: Cours;
+  // cours: Cours;
 
-  /**
-   * reference vers l'utilisateur
-   */
   @Input() cour: Cours;
 
-  /**
-   * boolean pour afficher le dialog
-   */
   @Input() afficherDialog = false;
 
-  /**
-   * evenement après la fermeture du dialog
-   */
   @Output() onDialogHide = new EventEmitter(true);
+
+  titreDialog: string;
+
+  status: [0, 1];
 
   constructor(private coursService: CoursService, private profService: ProfService, private coursServiece: CoursService) {
   }
 
   ngOnInit(): void {
-    this.cour = {
-      dateCour: "",
-      description: "",
-      heureCour: "",
-      id: "",
-      matiere: "",
-      profId: "",
-    };
     this.getAllProfs();
   }
 
@@ -47,24 +34,49 @@ export class DialogCourComponent implements OnInit {
     this.onDialogHide.emit();
   }
 
+  modeModification(): boolean {
+    return this.cour.id !== undefined
+  }
+
+  private setTitreDialog(): void {
+    setTimeout(() => {
+      if (this.modeModification()) {
+        this.titreDialog = `Modification du cour ${this.cour.matiere}`;
+      } else {
+        this.titreDialog = `Ajout d'un nouveau cour`;
+      }
+    })
+
+  }
+
+  onShow(): void {
+    this.setTitreDialog();
+  }
+
   async getAllcours() {
     this.coursServiece.getCoursBe().subscribe(res => {
-      this.cours = res;
-      console.log(this.cours);
     }, err => {
       console.log('error de recup');
     });
   }
 
-  ajouterCour() {
-    console.log("-------");
-    console.log(this.cour);
-    this.coursService.addCours(this.cour).subscribe((response) => {
-      this.afficherDialog = false;
-      this.getAllcours();
-    }, error => {
-      console.log(error);
-    });
+  valider(): void {
+    if (this.modeModification()) {
+      this.coursService.updateCour(this.cour).subscribe(response => {
+        this.afficherDialog = false;
+        this.getAllcours();
+      }, error => {
+
+      })
+    } else {
+      this.coursService.addCours(this.cour).subscribe((response) => {
+        this.afficherDialog = false;
+        this.getAllcours();
+      }, error => {
+        console.log(error);
+      });
+
+    }
 
   }
 
@@ -77,7 +89,6 @@ export class DialogCourComponent implements OnInit {
           this.profs.push(elt);
         }
       });
-      console.log(this.profs);
     }, error => {
       console.log(error);
     });
