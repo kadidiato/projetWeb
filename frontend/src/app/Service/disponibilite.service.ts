@@ -25,6 +25,10 @@ export class DisponibiliteService {
     return this.http.post(`${this.api_url}/disponibilites`, dispo);
   }
 
+  updateDispo(dispo) {
+    return this.http.put(`${this.api_url}/disponibilites`, dispo);
+  }
+
   /**
    * recuperation un cour en connaissant son id tslint:disable-next-line:no-redundant-jsdoc
    * @param__id

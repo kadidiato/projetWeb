@@ -1,5 +1,5 @@
 <p-dialog (onHide)="onHide()" [(visible)]="showDialog" [baseZIndex]="10000"
-          [minY]="0" [modal]="true"
+          (onShow)="onShow()" [minY]="0" [modal]="true"
           [responsive]="true" [style]="{width: '400px', minWidth: '250px'}" header="Disponibilité">
   <form #form="ngForm">
     <div class="form-group">
@@ -24,7 +24,7 @@
     </div>
     <br>
     <p-footer>
-      <button (click)="addDispo()" [disabled]="form.invalid" class="ui-button-rounded" label="Ajouter" pButton
+      <button (click)="validateForm()" [disabled]="form.invalid" class="ui-button-rounded" label="Ajouter" pButton
               style="margin-right: 10px" type="button">
       </button>
       <button (click)="showDialog = false" class="ui-button-secondary ui-button-rounded"

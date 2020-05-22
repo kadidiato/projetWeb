@@ -46,9 +46,17 @@
                 <td>{{c.createdAt | date: 'dd/MM/yyyy'}}</td>
                 <td>{{c.updatedAt | date: 'dd/MM/yyyy'}}</td>
                 <td>
-                  <div class="btn-group text-center ">
-                    <button (click)="reserver(c.id)" [disabled]="authService.type === 'prof'"
-                            class="btn btn-outline-success" type="button">Reserver
+                  <div *ngIf="authService.type === 'eleve'" class="btn-group text-center">
+                    <button (click)="reserver(c.id)" class="btn btn-outline-success"
+                            type="button">Reserver
+                    </button>
+                  </div>
+                  <div *ngIf="authService.type === 'prof'" class="btn-group text-center">
+                    <button (click)="showUpdateDispoDialog(c)" class="btn btn-outline-dark">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-outline-danger">
+                      <i class="fa fa-trash"></i>
                     </button>
                   </div>
 
@@ -67,5 +75,6 @@
       </div>
     </div>
   </div>
-<app-add-dispo-dialog (onDialogHide)="onAddDispoDialogHide()" [showDialog]="afficherDialog">
+<app-add-dispo-dialog (onDialogHide)="onAddDispoDialogHide()" [dispo]="dispanip" [modif]="modif"
+                      [showDialog]="afficherDialog">
 </app-add-dispo-dialog>

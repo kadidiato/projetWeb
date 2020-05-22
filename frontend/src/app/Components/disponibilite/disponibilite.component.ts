@@ -11,8 +11,10 @@ import {AuthService} from "../../Service/auth.service";
 })
 export class DisponibiliteComponent implements OnInit {
 
-  disponibilites: Disponibilite;
+  disponibilites: Disponibilite[];
+  dispanip: Disponibilite;
   afficherDialog: boolean;
+  modif: boolean;
 
   constructor(private disponibiliteServiece: DisponibiliteService, private route: Router,
               public authService: AuthService) {
@@ -43,6 +45,13 @@ export class DisponibiliteComponent implements OnInit {
   }
 
   showAddDispoDialog() {
+    this.dispanip = new Disponibilite();
+    this.afficherDialog = true;
+  }
+
+  showUpdateDispoDialog(d) {
+    this.dispanip = d;
+    this.modif = true;
     this.afficherDialog = true;
   }
 

@@ -11,7 +11,8 @@ import {AuthService} from "../../../Service/auth.service";
 })
 export class AddDispoDialogComponent implements OnInit {
 
-  dispo: Disponibilite;
+  @Input() dispo: Disponibilite;
+  @Input() modif = false;
   @Input() showDialog = false;
   @Output() onDialogHide = new EventEmitter(true);
 
@@ -20,7 +21,34 @@ export class AddDispoDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dispo = new Disponibilite();
+    if (!this.modif) {
+      this.dispo = new Disponibilite();
+    }
+  }
+
+  validateForm() {
+    if (this.modif) {
+      this.updateDispo();
+    } else {
+      this.addDispo();
+    }
+  }
+
+  updateDispo() {
+    this.dispoService.updateDispo(this.dispo).subscribe((res) => {
+      this.showDialog = false;
+      this.msgService.add({
+        severity: 'success', summary: 'Mise à jour disponibilité',
+        detail: 'Votre dispo a été mise à jour'
+      });
+    }, error => {
+      console.log('error while posting dispo');
+      console.log(error);
+      this.msgService.add({
+        severity: 'error', summary: 'Mise à jour disponibilité',
+        detail: `Une erreur est survenue lors de la mise à jour de la disponibilité`
+      });
+    });
   }
 
   addDispo() {
@@ -39,6 +67,15 @@ export class AddDispoDialogComponent implements OnInit {
         detail: `Une erreur est survenue lors de l'enregistrement de la nouvelle disponibilité`
       });
     })
+  }
+
+  onShow() {
+    if (!this.modif) {
+      this.dispo = new Disponibilite();
+    }
+
+    console.log('dispanip');
+    console.log(this.dispo);
   }
 
   onHide(): void {
