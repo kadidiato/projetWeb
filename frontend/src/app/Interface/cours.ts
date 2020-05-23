@@ -1,6 +1,6 @@
 export class Cours {
   id: string;
-  profId: string;
+  ProfId: string;
   dateCour: string;
   heureCour: string;
   matiere: string;

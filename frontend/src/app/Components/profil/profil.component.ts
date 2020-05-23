@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Eleves} from "../../Interface/eleve";
 import {AngularFireAuth} from "@angular/fire/auth";
 import {ElevesService} from "../../Service/eleves.service";
 import {ProfService} from "../../Service/prof.service";
 import {Prof} from "../../Interface/Prof";
 import {ConfirmationService, MessageService} from "primeng";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-profil',
@@ -23,7 +24,7 @@ export class ProfilComponent implements OnInit {
 
   constructor(private afAuth: AngularFireAuth, private elevesService: ElevesService,
               private  profService: ProfService, private confirmService: ConfirmationService,
-              private messageService: MessageService) {
+              private messageService: MessageService, @Inject(DOCUMENT) private document: Document) {
   }
 
   ngOnInit(): void {
@@ -34,7 +35,6 @@ export class ProfilComponent implements OnInit {
     this.afAuth.user.subscribe(u => {
       if (u) {
         this.type = localStorage.getItem('type');
-
         if (this.type === 'eleve') {
           this.elevesService.getEleveByid(u.uid).subscribe(res => {
             this.eleve = res;
@@ -47,7 +47,6 @@ export class ProfilComponent implements OnInit {
           // get du prof
           this.profService.getProfByid(u.uid).subscribe(res => {
             this.prof = res;
-            console.log(this.prof);
             this.userPhoto.photo = u.photoURL;
           }, r => {
             console.log('errr' + r);
