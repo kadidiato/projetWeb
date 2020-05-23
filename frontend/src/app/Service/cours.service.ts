@@ -4,6 +4,7 @@ import {Observable, throwError} from "rxjs";
 import {Cours} from "../Interface/cours";
 import {catchError} from "rxjs/operators";
 import {Eleves} from "../Interface/eleve";
+import {Prof} from "../Interface/Prof";
 
 
 @Injectable({
@@ -61,6 +62,15 @@ export class CoursService {
         }
       );
     }));
+  }
+
+  getCourById(id) {
+    return this.http.get<Cours>(`${this.api_redirect}/cours/${id}`);
+  }
+
+
+  deleteCour(id) {
+    return this.http.delete(`${this.api_redirect}/cours/${id}`);
   }
 
   handleError(error) {

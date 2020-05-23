@@ -7,7 +7,9 @@ export class Cours {
   dateCour: string;
   heureCour: string;
   description: string;
-  prix_cours_heure: number;
+  prix_cours_heure: string;
+  createdAt: string;
+  updatedAt: string;
   /* description: string;
   prixHeure
 */

@@ -45,6 +45,7 @@ export class DialogCourComponent implements OnInit {
     setTimeout(() => {
       if (this.modeModification()) {
         this.titreDialog = `Modification du cour ${this.cour.matiere}`;
+        this.status = this.cour.status === 0 ? "dispo" : "indispo;"
       } else {
         this.titreDialog = `Ajout d'un nouveau cour`;
       }

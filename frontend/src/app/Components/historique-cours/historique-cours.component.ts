@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CoursService} from "../../Service/cours.service";
 import {Cours} from "../../Interface/cours";
+import {AuthService} from "../../Service/auth.service";
+import {ConfirmationService, MessageService} from "primeng";
 
 @Component({
   selector: 'app-list-cours',
@@ -9,12 +11,12 @@ import {Cours} from "../../Interface/cours";
 })
 export class HistoriqueCoursComponent implements OnInit {
 
-  cours: Cours;
+  cours: Cours[];
   afficherDialog = false;
-
   courSelectionne: Cours;
 
-  constructor(private coursServiece: CoursService) {
+  constructor(private coursServiece: CoursService, private confirmService: ConfirmationService,
+              private msgService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -51,5 +53,30 @@ export class HistoriqueCoursComponent implements OnInit {
   modificationCour(cour: Cours) {
     this.courSelectionne = cour;
     this.afficherDialog = true;
+  }
+
+  confirmDelete(id) {
+    this.confirmService.confirm({
+      message: `Etes-vous sûr·e de vouloir supprimer cet cour ?`,
+      accept: () => {
+        this.coursServiece.deleteCour(id).subscribe((res) => {
+          this.init();
+          this.msgService.add({
+            severity: 'success', summary: 'Suppression de cour',
+            detail: 'Le a été supprimée avec succes'
+          });
+        }, error => {
+          console.log('erreur');
+          console.log(error);
+          this.msgService.add({
+            severity: 'error', summary: 'Suppression le cour',
+            detail: 'Une erreur est survenue lors de la suppression du cour'
+          });
+        })
+      },
+      reject: () => {
+        console.log('rejected');
+      }
+    });
   }
 }

@@ -27,6 +27,7 @@
               <th>Cours #</th>
               <th>Matiere</th>
               <th>Description</th>
+              <th>Prix cour</th>
               <th>Date cour</th>
               <th>Heure cour</th>
               <th>Créer le</th>
@@ -39,8 +40,9 @@
               <td>{{c.id}}</td>
               <td>{{c.matiere}}</td>
               <td>{{c.description}}</td>
+              <td>{{c.prix_cours_heure}}</td>
               <td>{{c.dateCour | date: 'dd/MM/yyyy'}}</td>
-              <td>{{c.heureCour | date: 'dd/MM/yyyy'}}</td>
+              <td>{{c.heureCour | date: 'HH:mm:ss'}}</td>
               <td>{{c.createdAt | date: 'dd/MM/yyyy'}}</td>
               <td>{{c.updatedAt | date: 'dd/MM/yyyy'}}</td>
               <td>
@@ -51,8 +53,8 @@
                   <button (click)="modificationCour(c)"
                           class="btn btn-primary"><i class="fas fa-edit"></i>
                   </button>
-                  <button
-                    class="btn btn-danger"><i class="far fa-trash-alt"></i>
+                  <button (click)="confirmDelete(c.id)" pTooltip="Supprimer le cour" tooltipPosition="top"
+                          class="btn btn-danger"><i class="far fa-trash-alt"></i>
                   </button>
                 </div>
 
@@ -68,3 +70,12 @@
 <app-dialog-cour (onDialogHide)="onHideProfilDialog($event)" *ngIf="afficherDialog" [afficherDialog]="afficherDialog"
                  [cour]="courSelectionne">
 </app-dialog-cour>
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button (click)="cd.reject()" icon="pi pi-times" label="Non, arrêtons" pButton type="button"></button>
+    <button (click)="cd.accept()" class="ui-button-danger" icon="pi pi-check" label="Oui, continuons"
+            pButton type="button">
+    </button>
+  </p-footer>
+</p-confirmDialog>
+<p-toast position="bottom-left"></p-toast>
