@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Cours} from "../../../Interface/cours";
 import {CoursService} from "../../../Service/cours.service";
 import {ProfService} from "../../../Service/prof.service";
+import {AuthService} from "../../../Service/auth.service";
 
 @Component({
   selector: 'app-dialog-cour',
@@ -21,13 +22,14 @@ export class DialogCourComponent implements OnInit {
 
   titreDialog: string;
 
-  status: [0, 1];
-
-  constructor(private coursService: CoursService, private profService: ProfService, private coursServiece: CoursService) {
+  constructor(private coursService: CoursService, private profService: ProfService, private coursServiece: CoursService,
+              protected authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.getAllProfs();
+    if (!this.modeModification()) {
+      this.cour.status = -1;
+    }
   }
 
   onHide(): void {
@@ -69,28 +71,18 @@ export class DialogCourComponent implements OnInit {
 
       })
     } else {
-      this.coursService.addCours(this.cour).subscribe((response) => {
-        this.afficherDialog = false;
-        this.getAllcours();
-      }, error => {
-        console.log(error);
-      });
-
+      this.cour.profId = this.authService.user.id;
+      console.log('le cours à creer');
+      console.log(this.cour);
+      if (0) {
+        this.coursService.addCours(this.cour).subscribe((response) => {
+          this.afficherDialog = false;
+          this.getAllcours();
+        }, error => {
+          console.log(error);
+        });
+      }
     }
 
-  }
-
-  getAllProfs() {
-    this.profService.getAllProf().subscribe((res) => {
-      this.profs = [Object.assign([])];
-      res.map(c => {
-        const elt = {id: c.id, text: c.nomProf + ' ' + c.prenomProf};
-        if (this.profs.indexOf(elt) === -1) {
-          this.profs.push(elt);
-        }
-      });
-    }, error => {
-      console.log(error);
-    });
   }
 }

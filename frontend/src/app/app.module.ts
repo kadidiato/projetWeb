@@ -12,7 +12,15 @@ import {ForgotPasswordComponent} from './Components/forgot-password/forgot-passw
 import {SignUpComponent} from './Components/sign-up/sign-up.component';
 import {HistoriqueCoursComponent} from './Components/historique-cours/historique-cours.component';
 import {DisponibiliteComponent} from './Components/disponibilite/disponibilite.component';
-import {ButtonModule, ConfirmationService, ConfirmDialogModule, DialogModule, TableModule, ToastModule} from "primeng";
+import {
+  ButtonModule,
+  ConfirmationService,
+  ConfirmDialogModule,
+  DialogModule,
+  TableModule,
+  ToastModule,
+  TooltipModule,
+} from "primeng";
 
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
@@ -81,7 +89,8 @@ import {ProfDetailComponent} from './Components/cour-eleve/prof-detail/prof-deta
     ButtonModule,
     NgxSelectModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    TooltipModule,
 
   ],
   providers: [MessageService, ConfirmationService],
