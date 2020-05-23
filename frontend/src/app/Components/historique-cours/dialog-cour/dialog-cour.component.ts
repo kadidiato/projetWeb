@@ -21,6 +21,7 @@ export class DialogCourComponent implements OnInit {
   @Output() onDialogHide = new EventEmitter(true);
 
   titreDialog: string;
+  status: string;
 
   constructor(private coursService: CoursService, private profService: ProfService, private coursServiece: CoursService,
               protected authService: AuthService) {
@@ -28,7 +29,7 @@ export class DialogCourComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.modeModification()) {
-      this.cour.status = -1;
+      this.status = "";
     }
   }
 
@@ -55,7 +56,7 @@ export class DialogCourComponent implements OnInit {
     this.setTitreDialog();
   }
 
-  async getAllcours() {
+  getAllcours() {
     this.coursServiece.getCoursBe().subscribe(res => {
     }, err => {
       console.log('error de recup');
@@ -72,16 +73,15 @@ export class DialogCourComponent implements OnInit {
       })
     } else {
       this.cour.profId = this.authService.user.id;
-      console.log('le cours à creer');
-      console.log(this.cour);
-      if (0) {
-        this.coursService.addCours(this.cour).subscribe((response) => {
-          this.afficherDialog = false;
-          this.getAllcours();
-        }, error => {
-          console.log(error);
-        });
-      }
+      this.cour.status = this.status === "dispo" ? 0 : 1;
+      this.coursService.addCours(this.cour).subscribe((response) => {
+        this.afficherDialog = false;
+        this.onDialogHide.emit(true);
+        this.getAllcours();
+      }, error => {
+        console.log(error);
+        this.onDialogHide.emit(false);
+      });
     }
 
   }
