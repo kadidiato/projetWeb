@@ -38,8 +38,13 @@ export class HistoriqueCoursComponent implements OnInit {
   /**
    * fermeture du dialog pop up
    */
-  onHideProfilDialog(): void {
+  onHideProfilDialog($event): void {
+    console.log('Event result');
+    console.log($event);
     this.afficherDialog = false;
+    if ($event) {
+      this.init();
+    }
   }
 
 

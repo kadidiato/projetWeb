@@ -56,20 +56,13 @@ export class DialogCourComponent implements OnInit {
     this.setTitreDialog();
   }
 
-  getAllcours() {
-    this.coursServiece.getCoursBe().subscribe(res => {
-    }, err => {
-      console.log('error de recup');
-    });
-  }
-
   valider(): void {
     if (this.modeModification()) {
       this.coursService.updateCour(this.cour).subscribe(response => {
         this.afficherDialog = false;
-        this.getAllcours();
+        this.onDialogHide.emit(true);
       }, error => {
-
+        this.onDialogHide.emit(false);
       })
     } else {
       this.cour.profId = this.authService.user.id;
@@ -77,7 +70,6 @@ export class DialogCourComponent implements OnInit {
       this.coursService.addCours(this.cour).subscribe((response) => {
         this.afficherDialog = false;
         this.onDialogHide.emit(true);
-        this.getAllcours();
       }, error => {
         console.log(error);
         this.onDialogHide.emit(false);
