@@ -154,7 +154,7 @@ async function getcourOfEleve(req, res) {
                     message: 'Une erreur est survenue lors de la création reservation'
                 });
             }
-            console.log("ici")
+            //console.log("ici")
 
             reservationDao.updateCoursStatusOFF(coursId);
            
