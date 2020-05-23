@@ -25,13 +25,17 @@ async function updateCoursStatusON(id) {
 }
 
 
-async function updateCoursStatusOFF(id) {
-    return models.sequelize.query("UPDATE Cours SET status = 1 WHERE id= ?",
+async function updateCoursStatusOFF(id, transaction) {
+    return models.Cours.update(
+        {status: 1},
         {
-            replacements: [id],
-            type: sequelize.QueryTypes.UPDATE
-        });
-
+            where: {id: id},
+            transaction: transaction
+        }).then((updatedReservation) => {
+        return updatedReservation;
+    }).catch((err) => {
+        return err;
+    });
 }
 
 module.exports = {

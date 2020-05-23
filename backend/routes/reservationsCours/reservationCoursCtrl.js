@@ -138,30 +138,39 @@ async function getcourOfEleve(req, res) {
             coursId: reservation.coursId,
             eleveId: reservation.eleveId,
         }
-    }).then((resa) => {
-        console.log("la resa trouvée");
-        console.log(resa);
+    }).then(async (resa) => {
         if (resa) {
             return res.status(304).json({
                 message: "Une réservation existe deja pour le cours "
                     + reservation.coursId + " pour l'eleve " + reservation.eleveId
-            })
+            });
         }
+
+        let transaction = await models.sequelize.transaction({autocommit: false});
         //insertion dans la base de données
-        models.Reservation.create(reservation).then((newReservation) => {
-            if (!newReservation) {
+        try {
+            let resa = await models.Reservation.create(reservation, {transaction: transaction}).then((newReservation) => {
+                return newReservation;
+            }).catch((err) => {
+                return err;
+            });
+
+            let result = await reservationDao.updateCoursStatusOFF(reservation.coursId, transaction);
+            console.log('result');
+            console.log(result[0]);
+            if (!result[0]) {
+                await transaction.rollback();
                 return res.status(500).json({
-                    message: 'Une erreur est survenue lors de la création reservation'
+                    message: "cannot complete your request"
                 });
             }
-            console.log("ici")
+            await transaction.commit();
 
-            reservationDao.updateCoursStatusOFF(coursId);
-           
-            return res.status(201).json(newReservation);  
-        }).catch((err) => {
-            return res.status(500).json(err);
-        })
+            return res.status(201).json(resa);
+        } catch (e) {
+            await transaction.rollback();
+            return res.status(500).json(e);
+        }
     });
 }
 
