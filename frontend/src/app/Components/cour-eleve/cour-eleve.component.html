@@ -16,6 +16,7 @@
           <ng-template pTemplate="header">
             <tr class="text-center ">
               <th>Cours #</th>
+              <th>Professeur</th>
               <th>Matiere</th>
               <th>Description</th>
               <th>Date cour</th>
@@ -28,6 +29,7 @@
           <ng-template pTemplate="body" let-c>
             <tr class="text-center ">
               <td>{{c.id}}</td>
+              <td>{{c.ProfId}}</td>
               <td>{{c.matiere}}</td>
               <td>{{c.description}}</td>
               <td>{{c.dateCour | date: 'dd/MM/yyyy'}}</td>

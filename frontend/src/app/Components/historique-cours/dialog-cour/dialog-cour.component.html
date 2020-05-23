@@ -4,7 +4,7 @@
   <form #form="ngForm">
     <div class="form-group">
       <label for="profId">Professeur</label>
-      <select [(ngModel)]="cour.profId" id="profId" name="profId">
+      <select [(ngModel)]="cour.ProfId" id="ProfId" name="profId">
         <option *ngFor="let prof of profs" [value]="prof.id">{{prof.text}}</option>
       </select>
       <!--<ngx-select  [(ngModel)]="cour.profId" [items]="profs" id="profId"
@@ -35,7 +35,7 @@
 
     <div class="form-group">
       <label for="status">Status</label>
-      <select [(ngModel)]="cour.profId" id="status" name="status">
+      <select [(ngModel)]="cour.ProfId" id="status" name="status">
         <option *ngFor="let status of status" [value]="status.valueOf()">{{status}}</option>
       </select>
     </div>
