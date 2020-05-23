@@ -1,11 +1,13 @@
 export class Cours {
   id: string;
   ProfId: string;
+  status: number;
+  profId?: string;
+  matiere: string;
   dateCour: string;
   heureCour: string;
-  matiere: string;
   description: string;
-  status: number;
+  prix_cours_heure: number;
   /* description: string;
   prixHeure
 */

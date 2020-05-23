@@ -20,7 +20,8 @@
             </div>
           </div>
         </div>
-        <p-table [paginator]="true" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [value]="cours">
+        <p-table [loading]="!cours" [paginator]="true" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
+                 [value]="cours">
           <ng-template pTemplate="header">
             <tr class="text-center ">
               <th>Cours #</th>
@@ -64,6 +65,6 @@
   </div>
 </div>
 
-<app-dialog-cour *ngIf="afficherDialog" (onDialogHide)="onHideProfilDialog()" [afficherDialog]="afficherDialog"
+<app-dialog-cour (onDialogHide)="onHideProfilDialog($event)" *ngIf="afficherDialog" [afficherDialog]="afficherDialog"
                  [cour]="courSelectionne">
 </app-dialog-cour>

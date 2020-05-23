@@ -45,7 +45,7 @@ export class ProfilComponent implements OnInit {
           });
         } else if (this.type === 'prof') {
           // get du prof
-          this.profService.getProfByid(u.uid).subscribe(res => {
+          this.profService.getProfByUid(u.uid).subscribe(res => {
             this.prof = res;
             this.userPhoto.photo = u.photoURL;
           }, r => {
