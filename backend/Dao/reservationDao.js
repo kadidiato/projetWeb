@@ -14,6 +14,16 @@ async function getCoursByEleve(id) {
 
 
 }
+async function getCoursIdByReservation(id, transaction) {
+    return models.sequelize.query("select coursId " +
+        "from Reservations R where R.id= ? ",
+        {
+            replacements: [id],
+            type: sequelize.QueryTypes.SELECT
+        }, {transaction: transaction});
+
+
+}
 
 async function updateCoursStatusON(id) {
     return models.sequelize.query("UPDATE Cours SET status=0 WHERE id= ?",
@@ -39,6 +49,6 @@ async function updateCoursStatusOFF(id, transaction) {
 }
 
 module.exports = {
-    getCoursByEleve,updateCoursStatusON,updateCoursStatusOFF
+    getCoursByEleve,updateCoursStatusON,updateCoursStatusOFF, getCoursIdByReservation
 
 };
