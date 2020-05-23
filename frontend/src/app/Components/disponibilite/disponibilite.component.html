@@ -52,11 +52,13 @@
                     </button>
                   </div>
                   <div *ngIf="authService.type === 'prof'" class="btn-group text-center">
-                    <button (click)="showUpdateDispoDialog(c)" class="btn btn-outline-dark">
-                      <i class="fa fa-pencil"></i>
+                    <button (click)="showUpdateDispoDialog(c)" class="btn btn-outline-dark"
+                            pTooltip="Modifier la disponibilité" tooltipPosition="top">
+                      <i aria-hidden="true" class="fa fa-edit"></i>
                     </button>
-                    <button (click)="confirmDelete(c.id)" class="btn btn-outline-danger">
-                      <i class="fa fa-trash"></i>
+                    <button (click)="confirmDelete(c.id)" class="btn btn-outline-danger"
+                            pTooltip="Supprimer la disponibilité" tooltipPosition="top">
+                      <i aria-hidden="true" class="fa fa-trash"></i>
                     </button>
                   </div>
 
