@@ -23,6 +23,7 @@ export class DialogCourComponent implements OnInit {
   titreDialog: string;
   status: string;
 
+
   constructor(private coursService: CoursService, private profService: ProfService, private coursServiece: CoursService,
               protected authService: AuthService) {
   }
@@ -50,8 +51,8 @@ export class DialogCourComponent implements OnInit {
         this.titreDialog = `Ajout d'un nouveau cour`;
       }
     })
-
   }
+
 
   onShow(): void {
     this.setTitreDialog();
