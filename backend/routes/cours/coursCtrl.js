@@ -1,5 +1,5 @@
 var models = require('../../models');
-const { validationResult } = require('express-validator');
+const {validationResult} = require('express-validator');
 
 /**
  * Controller pour recuperer tous les cours non reservés qui sont base
@@ -8,7 +8,14 @@ const { validationResult } = require('express-validator');
  * @param next
  */
 function getAll(req, res, next) {
-    models.Cours.findAll( {where: { status: 0 } }).then((cours) => {
+    models.Cours.findAll(
+        {
+            where: {status: 0},
+            include: [{
+                model: models.Prof,
+                attributes: ['nomProf', 'prenomProf']
+            }]
+        }).then((cours) => {
         //si je trouve pas de cours je retourne un status 404 avec un petit message
         if (!cours)
             return res.status(404).json({
@@ -43,7 +50,7 @@ function getByProfId(req, res, next) {
     let prof = req.params.profId;
 
     models.Cours.findAll({
-        where: { profId: prof }
+        where: {profId: prof}
     }).then((cours) => {
         //si je trouve pas de cours je retourne un status 404 avec un petit message
         if (!cours)
@@ -69,7 +76,7 @@ function save(req, res, next) {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        res.status(422).json({ errors: errors.array() });
+        res.status(422).json({errors: errors.array()});
         return;
     }
     //recuperation des infos du cours à creer
@@ -85,7 +92,7 @@ function save(req, res, next) {
     };
 
     models.Prof.findOne({
-        where: { id: cours.ProfId }
+        where: {id: cours.ProfId}
     }).then((profFound) => {
         if (profFound) {
             models.Cours.create(cours).then((newCours) => {
@@ -129,7 +136,7 @@ function destroy(req, res, next) {
     let cours_id = req.params.id;
 
     models.Cours.destroy({
-        where: { id: cours_id }
+        where: {id: cours_id}
     }).then((destroyedCours) => {
         return res.status(200).json(destroyedCours);
     }).catch((err) => {
