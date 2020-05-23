@@ -100,6 +100,7 @@ function getReservationByEleveId(req, res, next) {
     });
 
 }
+//UPDATE `cours` SET `status`=0 WHERE id= 1
 
 async function getcourOfEleve(req, res) {
     let id = req.params.eleveId;
@@ -124,7 +125,7 @@ async function getcourOfEleve(req, res) {
  * @param res
  * @param next
  */
-function save(req, res, next) {
+ async function save(req, res, next) {
     //recuperation des infos du cours à creer
     let reservation = {
         datereservation: req.body.datereservation,
@@ -153,8 +154,11 @@ function save(req, res, next) {
                     message: 'Une erreur est survenue lors de la création reservation'
                 });
             }
+            console.log("ici")
 
-            return res.status(201).json(newReservation);
+            reservationDao.updateCoursStatusOFF(coursId);
+           
+            return res.status(201).json(newReservation);  
         }).catch((err) => {
             return res.status(500).json(err);
         })
