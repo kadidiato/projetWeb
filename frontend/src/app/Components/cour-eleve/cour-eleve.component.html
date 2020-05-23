@@ -29,7 +29,7 @@
           <ng-template pTemplate="body" let-c>
             <tr class="text-center ">
               <td>{{c.id}}</td>
-              <td>{{c.ProfId}}</td>
+              <td><a [routerLink]="['/cours/info-prof/', c.ProfId]">{{c.Prof.nomProf}} {{ c.Prof.prenomProf}}</a></td>
               <td>{{c.matiere}}</td>
               <td>{{c.description}}</td>
               <td>{{c.dateCour | date: 'dd/MM/yyyy'}}</td>
