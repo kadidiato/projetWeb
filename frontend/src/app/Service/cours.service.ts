@@ -21,6 +21,10 @@ export class CoursService {
     return this.http.get(`${this.api_redirect}/cours`);
   }
 
+  getCourByProfId(profId: string): Observable<any> {
+    return this.http.get(`${this.api_redirect}/profCours/${profId}`)
+  }
+
   /**
    * recuperation un cour en connaissant son id tslint:disable-next-line:no-redundant-jsdoc
    * @param__id

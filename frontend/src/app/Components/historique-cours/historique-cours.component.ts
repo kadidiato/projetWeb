@@ -3,6 +3,9 @@ import {CoursService} from "../../Service/cours.service";
 import {Cours} from "../../Interface/cours";
 import {AuthService} from "../../Service/auth.service";
 import {ConfirmationService, MessageService} from "primeng";
+import {AngularFireAuth} from "@angular/fire/auth";
+import {ProfService} from "../../Service/prof.service";
+import {Prof} from "../../Interface/Prof";
 
 @Component({
   selector: 'app-list-cours',
@@ -12,11 +15,13 @@ import {ConfirmationService, MessageService} from "primeng";
 export class HistoriqueCoursComponent implements OnInit {
 
   cours: Cours[];
+  prof: Prof;
   afficherDialog = false;
   courSelectionne: Cours;
 
   constructor(private coursServiece: CoursService, private confirmService: ConfirmationService,
-              private msgService: MessageService) {
+              private msgService: MessageService, private afAuth: AngularFireAuth,
+              private profService: ProfService) {
   }
 
   ngOnInit(): void {
@@ -24,9 +29,19 @@ export class HistoriqueCoursComponent implements OnInit {
   }
 
   async init() {
-    this.coursServiece.getCoursBe().subscribe(res => {
+    this.afAuth.user.subscribe(u => {
+        this.profService.getProfByUid(u.uid).subscribe((response) => {
+          this.prof = response;
+          this.getCoursByProfId(this.prof.id);
+
+        });
+    })
+
+  }
+
+  getCoursByProfId(id: string) {
+    this.coursServiece.getCourByProfId(id).subscribe(res => {
       this.cours = res;
-      console.log(this.cours);
     }, err => {
       console.log('error de recup');
     });
